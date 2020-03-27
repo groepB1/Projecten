@@ -1,5 +1,5 @@
 package gui;
-
+//test voor gitHub
 import java.util.Scanner;
 
 import domein.DomeinController;
