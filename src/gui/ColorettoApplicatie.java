@@ -1,5 +1,5 @@
 package gui;
-//test voor gitHub
+
 import java.util.Scanner;
 
 import domein.DomeinController;
@@ -11,23 +11,11 @@ public class ColorettoApplicatie
 	public ColorettoApplicatie(DomeinController dc)
 	{
 		// spelnaam + aantalspelers ingeven. 1, 2.1
-		System.out.println("geef een spelnaam In");
-		String Spelnaam = invoer.nextLine();
-		
-		int aantalSpelers =0;
-		do {
-		System.out.println("Geef aantal spelers in");
-		aantalSpelers = invoer.nextInt();
-		dc.startNieuwSpel(Spelnaam, aantalSpelers);
-		} while (aantalSpelers != 4 && aantalSpelers !=5);
+		String Spelnaam=geefSpelNaamIn(dc);
+		int aantalSpelers = geefSpelersIn(dc, Spelnaam);
+
 		//spelersnamen ingeven 2.2
-		for (int teller = 0; teller<=aantalSpelers-1; teller++) 
-		{
-		System.out.printf("geef de naam van speler %d in.%n", teller+1);
-		String naam = invoer.next();
-		String spelerOverzicht = dc.geefSpelerNaamIn(naam);
-		System.out.println(spelerOverzicht);
-		}
+		System.out.println(geefSpelerNamenIn(aantalSpelers, dc));
 		
 
 		
@@ -69,7 +57,34 @@ public class ColorettoApplicatie
 		System.out.println(dc.geefEindOverzicht());	
 	}	
 
+	public String geefSpelNaamIn(DomeinController dc)
+	{
+		System.out.println("geef een spelnaam In");
+		String Spelnaam = invoer.nextLine();
+		return Spelnaam;
+	}
+	public int geefSpelersIn(DomeinController dc, String Spelnaam)
+	{
+		int aantalSpelers =0;
+		do {
+		System.out.println("Geef aantal spelers in");
+		aantalSpelers = invoer.nextInt();
+		dc.startNieuwSpel(Spelnaam, aantalSpelers);
+		} while (aantalSpelers != 4 && aantalSpelers !=5);
+		return aantalSpelers;
+	}
 	
+	public String geefSpelerNamenIn(int aantalSpelers, DomeinController dc)
+	{
+		String result ="";
+		for (int teller = 0; teller<=aantalSpelers-1; teller++) 
+		{
+		System.out.printf("geef de naam van speler %d in.%n", teller+1);
+		String naam = invoer.next();
+		result += dc.geefSpelerNaamIn(naam);
+		}
+		return result;
+	}
 	public void startRondeBeginSpeler(DomeinController dc)
 	{
 		System.out.println(dc.geefEersteSpelerAanZetWeer());
