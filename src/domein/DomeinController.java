@@ -85,4 +85,5 @@ public class DomeinController
 	{
 		spel.veranderKleur(kleurGetal, index);
 	}
+
 }

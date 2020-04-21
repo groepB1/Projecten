@@ -10,22 +10,28 @@ public class ColorettoApplicatie
 	
 	public ColorettoApplicatie(DomeinController dc)
 	{
-		// spelnaam + aantalspelers ingeven. 1, 2.1
+		//spel klaarzetten
 		String Spelnaam=geefSpelNaamIn(dc);
 		int aantalSpelers = geefSpelersIn(dc, Spelnaam);
-
-		//spelersnamen ingeven 2.2
 		System.out.println(geefSpelerNamenIn(aantalSpelers, dc));
 		
-
+		//spel effectief spelen
+		int ronde=1;
+		while (dc.isEindeSpel()==false||ronde ==2)// let op NA OF MOET WEG! enkel voor sneller te kunnen testen!
+		{
+			System.out.printf("Ronde %d%n", ronde);
+		speelRonde1(dc, aantalSpelers);
+		speelRonde2En3(dc, aantalSpelers);
+		ronde++;
+		}
 		
-		startRondeBeginSpeler(dc);
-		//A_ rond dit deel moet do while tot einde spel bereikt wordt(boolean methode isEindeSpel)komen dat alle ronden kunnen gespeeld worden. 	
-		//ronde 1, 2 en 3 worden weergegeven
+		
+		
+
 		
 		
 		  
-		while (dc.isEindeSpel() == false)  
+		/*while (dc.isEindeSpel() == false)  
 		{
 		
 		for (int teller2 =0; teller2<aantalSpelers-1; teller2++)
@@ -54,7 +60,7 @@ public class ColorettoApplicatie
 		}
 		jokerInstellen(dc, aantalSpelers);
 		
-		System.out.println(dc.geefEindOverzicht());	
+		System.out.println(dc.geefEindOverzicht());	*/
 	}	
 
 	public String geefSpelNaamIn(DomeinController dc)
@@ -73,7 +79,6 @@ public class ColorettoApplicatie
 		} while (aantalSpelers != 4 && aantalSpelers !=5);
 		return aantalSpelers;
 	}
-	
 	public String geefSpelerNamenIn(int aantalSpelers, DomeinController dc)
 	{
 		String result ="";
@@ -85,6 +90,46 @@ public class ColorettoApplicatie
 		}
 		return result;
 	}
+	
+	public void speelRonde1(DomeinController dc, int aantalSpelers)
+	{
+		startRondeBeginSpeler(dc);
+		for (int teller2 =0; teller2<aantalSpelers-1; teller2++)
+		{
+		startRondeAndereSpelers(dc);
+		}		
+	}
+	public void speelRonde2En3(DomeinController dc, int aantalSpelers)
+	{
+		
+		for (int teller = 0; teller <=1; teller++)
+		{
+		for (int teller2 = 0; teller2 <= aantalSpelers-1; teller2++)
+		{
+			System.out.println(dc.geefSpelerAanZetWeer());
+			
+			int uitkomst = geefOptie();
+			if (uitkomst == 1)
+				trekKaart(dc);
+			if (uitkomst == 2)
+				neemStapelRij(dc);
+			if(dc.isEindeRonde())
+				break;
+				
+		}
+		}
+		
+		while (dc.isEindeRonde()==false)
+		{
+		System.out.println(dc.geefSpelerAanZetWeer());
+		neemStapelRij(dc);
+		}
+		System.out.println(dc.geefOverzichtVanAlleSpelers());
+		dc.zetAllesKlaarVoorBeginRonde();
+	}
+	
+	
+	
 	public void startRondeBeginSpeler(DomeinController dc)
 	{
 		System.out.println(dc.geefEersteSpelerAanZetWeer());
@@ -97,16 +142,6 @@ public class ColorettoApplicatie
 		trekKaart(dc);
 	}
 	
-	public void ronde2En3(DomeinController dc)
-	{
-		System.out.println(dc.geefSpelerAanZetWeer());
-		
-		int uitkomst = geefOptie();
-		if (uitkomst == 1)
-			trekKaart(dc);
-		if (uitkomst == 2)
-			neemStapelRij(dc);
-	}
 	
 	public int geefOptie()
 	{

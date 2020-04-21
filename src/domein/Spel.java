@@ -97,6 +97,7 @@ public class Spel
 	{
 		Kaart getrokkenKaart = trekKaart();
 		speler.VoegKaartToe(getrokkenKaart);
+		//mag enkel kleurkaart zijn
 	}
 	
 	public Kaart trekKaart()
@@ -139,12 +140,19 @@ public class Spel
 	
 	public void voegKaartAanStapelToe(int stapelID)
 	{
-		if (stapelRijen.get(stapelID-1).isIsgenomen() == false)
+		if (stapelRijen.get(stapelID-1).isIsgenomen() || stapelRijen.get(stapelID-1).isVol() )
 		{
-		stapelRijen.get(stapelID-1).voegKaartToe(getrokkenKaart);
-		getrokkenKaart = null;
+			if (stapelRijen.get(stapelID-1).isIsgenomen())
+			throw new IllegalArgumentException("Fout, de rij is reeds genomen!");
+			else 
+				throw new IllegalArgumentException("Fout, de rij is vol!");
+				// betere opvang voor de fout. gebruiker moet de mogelijkheid krijgen om nieuwe rij in te geven. 
 		}
-		else throw new IllegalArgumentException("fout"); // betere opvang voor de fout. gebruiker moet de mogelijkheid krijgen om nieuwe rij in te geven. 
+		 
+		else 
+		{stapelRijen.get(stapelID-1).voegKaartToe(getrokkenKaart);
+		 getrokkenKaart = null;
+		}
  
 			
 	}
@@ -246,9 +254,7 @@ public class Spel
 	
 	public boolean isEindeSpel()
 	{
-		if (deckKaarten.size()==0)
-			return true;
-		else return false;
+		return deckKaarten.size()==0;
 	}
 		
 	public void zetAllesKlaarVoorBeginRonde()
@@ -314,6 +320,9 @@ public class Spel
 		
 		speler.VoegKaartToe(kaart);
 	}
+	
+	
+
 	//getters en setters
 	public String getNaam() {
 		return naam;
@@ -353,5 +362,6 @@ public class Spel
 		this.spelerLijst = spelerLijst;
 	}
 	
+
 }
 

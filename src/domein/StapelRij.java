@@ -47,9 +47,14 @@ public class StapelRij
 		this.kaartenPerRij = kaartenPerRij;
 	}
 
-	
+
 	public boolean isIsgenomen() {
 		return isgenomen;
+	}
+	
+	public boolean isVol()
+	{
+		return kaartenPerRij.size()>2;
 	}
 
 	public void setIsgenomen(boolean isgenomen) {
