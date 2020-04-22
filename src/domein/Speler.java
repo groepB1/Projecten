@@ -108,11 +108,12 @@ public class Speler
 		return aantalJokers;
 	}
 	
-	public void verwijderJoker()
+	public void veranderJoker(String kleur)
 	{
 		for (int teller =0; teller<= kaartLijstSpeler.size()-1; teller++)
 		{
-			kaartLijstSpeler.remove(new String ("joker"));
+			if(kaartLijstSpeler.get(teller).getKleur() == "joker")
+			kaartLijstSpeler.get(teller).setKleur(kleur);
 		}
 	}
 	//getters en setters

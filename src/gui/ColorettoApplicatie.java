@@ -17,16 +17,15 @@ public class ColorettoApplicatie
 		
 		//spel effectief spelen
 		int ronde=1;
-		while (dc.isEindeSpel()==false||ronde ==2)// let op NA OF MOET WEG! enkel voor sneller te kunnen testen!
+		while (/*dc.isEindeSpel()==false ||*/ ronde == 1 )// let op NA OF MOET WEG! enkel voor sneller te kunnen testen!
 		{
 			System.out.printf("Ronde %d%n", ronde);
 		speelRonde1(dc, aantalSpelers);
 		speelRonde2En3(dc, aantalSpelers);
 		ronde++;
 		}
-		
-		
-		
+		jokerInstellen(dc, aantalSpelers);
+		System.out.println(dc.geefOverzichtVanAlleSpelers());
 
 		
 		
@@ -104,6 +103,8 @@ public class ColorettoApplicatie
 		
 		for (int teller = 0; teller <=1; teller++)
 		{
+			if(dc.isEindeRonde())
+				break;
 		for (int teller2 = 0; teller2 <= aantalSpelers-1; teller2++)
 		{
 			System.out.println(dc.geefSpelerAanZetWeer());
@@ -117,6 +118,7 @@ public class ColorettoApplicatie
 				break;
 				
 		}
+		
 		}
 		
 		while (dc.isEindeRonde()==false)
@@ -169,11 +171,10 @@ public class ColorettoApplicatie
 	{
 		for (int teller = 0 ; teller <=aantalSpelers-1; teller++)
 		{
-		if (dc.geefSpelerMetJokerWeer(teller)!="")
-		{
-			dc.geefSpelerMetJokerWeer(teller);
 		
-			for (int teller2 = 0; teller2<= dc.geefAantalJokers(teller); teller2++)
+			System.out.println(dc.geefSpelerMetJokerWeer(teller));
+		
+			for (int teller2 = 0; teller2< dc.geefAantalJokers(teller); teller2++)
 			{
 				System.out.println("In welke kleur wil je de joker veranderen? Geef 1 in voor oranje. Geef 2 in voor blauw. Geef 3 in voor rood. Geef 4 in voor geel. Geef 5 in voor grijs. Geef 6 in voor groen. Geef 7 in voor roos.");
 				int kleurGetal = invoer.nextInt();
@@ -205,4 +206,4 @@ public class ColorettoApplicatie
 	
 //	11.	Herhaal vanaf stap 9 tot alle stapels genomen zijn. 
 
-}
+

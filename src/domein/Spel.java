@@ -16,7 +16,7 @@ public class Spel
 	private List<Speler> spelerLijst = new ArrayList<Speler>();
 
 
-	//1.1.1.1constructor spel. (deck, stapelrijen en aantal spelers worden aangemaakt.) 
+
 	public Spel(String naam, int aantalSpelers)
 	{
 		setNaam(naam);// naam wordt megegeven om later opgeslagenSpel te kunnen selecteren.
@@ -29,11 +29,6 @@ public class Spel
 	}
 	
 
-	
-	// 2.1.1 int aantalSpelers;
-	//2.2.1.1 LIST VAN SPELERS
-		
-	//1.1.1.2 maakDeckAan() ==>KAARTEN worden in volgorde ingeladen. OK!
 	public List<Kaart> maakDeckAan()
 
 	{
@@ -69,7 +64,7 @@ public class Spel
 		}
 		return kaartenLijst;
 	}
-	//1.1.1.3 maakStapelrijenAan()
+
 	public  List<StapelRij> maakStapelRijAan() 
 	{
 		List<StapelRij> stapelRij	= new ArrayList <StapelRij>();
@@ -81,7 +76,6 @@ public class Spel
 		
 		return stapelRij;
 	}
-	// 2.2.1.1geefSpelerNaam(String naam) ==> spelers worden aangemaakt en gaat lopen tot aantalSpelers berijkt is. 
 	public String geefSpelerNaam(String naam)
 	{
 		
@@ -90,9 +84,7 @@ public class Spel
 		geefBeginKaart(speler);
 		return geefOverzichtSpeler(speler);
 	}
-	
-	
-	//een kaart trekken
+
 	private void geefBeginKaart(Speler speler)
 	{
 		Kaart getrokkenKaart = trekKaart();
@@ -290,7 +282,7 @@ public class Spel
 	}
 	public String geefSpelerMetJokerWeer(int spelerIndex)
 	{
-		if (spelerLijst.get(spelerIndex).heeftJoker() == true)
+		if (spelerLijst.get(spelerIndex).heeftJoker())
 			return geefOverzichtSpeler(spelerLijst.get(spelerIndex));
 		else return "";
 	}
@@ -302,23 +294,22 @@ public class Spel
 	
 	public void veranderKleur(int kleurGetal, int index)
 	{
-		Speler speler = spelerLijst.get(index);
-		speler.verwijderJoker();
+		
+		
+		
+		
 		String kleur="";
-		switch (index-1) 
-		{
-		case 0: kleur = "oranje"; break;
-		case 1: kleur = "blauw"; break;
-		case 2: kleur = "rood"; break;
-		case 3: kleur = "geel"; break;
-		case 4: kleur = "grijs"; break;
-		case 5: kleur = "groen"; break;
-		case 6: kleur = "roos"; break;
+		switch (kleurGetal) 
+		{ case 1: kleur = "oranje"; break; 
+			case 2: kleur ="blauw"; break; 
+			case 3: kleur = "rood"; break; 
+			case 4: kleur = "geel"; break;
+			case 5: kleur = "grijs"; break; 
+			case 6: kleur = "groen"; break; 
+			case 7: kleur = "roos"; break; 
 		}
+		spelerLijst.get(index).veranderJoker(kleur);
 		
-		Kaart kaart = new Kaart(kleur);
-		
-		speler.VoegKaartToe(kaart);
 	}
 	
 	
