@@ -17,7 +17,7 @@ public class ColorettoApplicatie
 		
 		//spel effectief spelen
 		int ronde=1;
-		while (/*dc.isEindeSpel()==false ||*/ ronde == 1 )// let op NA OF MOET WEG! enkel voor sneller te kunnen testen!
+		while (dc.isEindeSpel()==false)// let op NA OF MOET WEG! enkel voor sneller te kunnen testen!
 		{
 			System.out.printf("Ronde %d%n", ronde);
 		speelRonde1(dc, aantalSpelers);
@@ -25,7 +25,7 @@ public class ColorettoApplicatie
 		ronde++;
 		}
 		jokerInstellen(dc, aantalSpelers);
-		System.out.println(dc.geefOverzichtVanAlleSpelers());
+		System.out.println(dc.geefEindOverzicht());
 
 		
 		

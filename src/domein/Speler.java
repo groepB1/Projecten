@@ -25,7 +25,8 @@ public class Speler
 	{
 		Kaart kaart;
 		int som = 0, aantalPlus2 = 0, aantalOranje = 0, aantalBlauw = 0, aantalGeel = 0, aantalRood = 0, aantalGroen = 0, aantalGrijs = 0, aantalRoos = 0;
-		for (int teller = 0; teller < kaartLijstSpeler.size(); teller++)
+		
+		for (int teller = 0; teller <= kaartLijstSpeler.size()-1; teller++)
 		{
 		kaart = kaartLijstSpeler.get(teller);
 		
@@ -42,15 +43,15 @@ public class Speler
 		}
 		}
 		int [] array = {aantalOranje, aantalBlauw, aantalGeel, aantalRood, aantalGroen,aantalGrijs, aantalRoos};
-				
-		Arrays.sort(array);
 		
-		for (int teller = array.length-1; teller>=4; teller--)
+		Arrays.sort(array);
+		//dit deel klopt!
+		for (int teller = array.length-1; teller>=array.length-3; teller--)
 		{
 			int aantal = array[teller];
 			switch (aantal) {
 			case 0: ; break;
-			case 1: som++;break;
+			case 1: som++ ;break;
 			case 2: som += 3;break;
 			case 3: som += 6;break;
 			case 4: som += 10;break;
@@ -60,6 +61,8 @@ public class Speler
 			default: som+= 21;break;
 			}
 		}
+		
+		
 		for (int teller = array.length-4; teller>=0; teller--)
 		{
 			int aantal = array[teller];
