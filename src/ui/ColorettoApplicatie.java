@@ -1,4 +1,4 @@
-package gui;
+package ui;
 
 import java.util.Scanner;
 import domein.DomeinController;
