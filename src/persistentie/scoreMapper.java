@@ -16,9 +16,9 @@ public class scoreMapper
 	{
 		 try (Connection conn = DriverManager.getConnection(MapperConfig.JDBC_URL))
 		 {
-			 PreparedStatement queryScoreToevoegen = conn.prepareStatement("TRUNCATE TABLE highscores; insert into highscores(spelernaam,score) values ('?',?);");
+			 PreparedStatement queryScoreToevoegen = conn.prepareStatement("insert into highscores(spelernaam,score) values (?,?);");
 			 queryScoreToevoegen.setString(1, speler.getNaam());
-			 queryScoreToevoegen.setInt(2, speler.berekenScore());
+			 queryScoreToevoegen.setInt(2, speler.getScore());
 			 queryScoreToevoegen.executeUpdate();
 			 return true;
 		 }catch (SQLException ex) {

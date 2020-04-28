@@ -273,6 +273,7 @@ public class Spel
 			String spelerOverzicht = geefOverzichtSpeler(speler);
 			int Score = speler.berekenScore();
 			EindOverzicht += String.format("%s%nScore:%d%n", spelerOverzicht, Score);	
+			scoreMap.voegScoreToe(speler);
 		}
 		return EindOverzicht;
 	}
@@ -308,7 +309,8 @@ public class Spel
 		}
 		spelerLijst.get(index).veranderJoker(kleur);
 	}
-
+	
+	
 	public String geefOverzichtHighscores()
 	{
 		List<Speler> spelers = scoreMap.geefScorebord();
@@ -316,7 +318,7 @@ public class Spel
 		
 		for (Speler speler : spelers)
 		{
-			result += String.format("%s %15d", speler.getNaam(), speler.getScore());
+			result += String.format("%s %15d%n", speler.getNaam(), speler.getScore());
 		}
 		
 		return result;
