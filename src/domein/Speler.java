@@ -6,14 +6,15 @@ import java.util.List;
 
 public class Speler 
 {
-	String naam;
+	private String naam;
+	private int score;
 	private List<Kaart> kaartLijstSpeler= new ArrayList <Kaart>();
-	boolean heeftRijOpgenomen;
-
+	private boolean heeftRijOpgenomen;
 
 	public Speler(String naam) 
 	{
 		setNaam(naam);
+		setScore(0);
 	}
 	
 	
@@ -82,7 +83,8 @@ public class Speler
 				default: som-= 21;break;
 			}
 		}
-		return som + aantalPlus2 *2;	
+		setScore(som + aantalPlus2 *2);
+		return som + aantalPlus2 *2;
 	}
 		
 	
@@ -138,6 +140,12 @@ public class Speler
 	public void setHeeftRijOpgenomen(boolean heeftRijOpgenomen) {
 		this.heeftRijOpgenomen = heeftRijOpgenomen;
 	}
+	public int getScore() {
+		return score;
+	}
+	public void setScore(int score) {
+		this.score = score;
+	}
 
 
 	public String toString()
@@ -149,4 +157,7 @@ public class Speler
 		}
 		return String.format("NAAM: %s%nKAARTEN:%n%s%n", getNaam(), kaarten );
 	}
+
+
+
 }

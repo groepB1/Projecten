@@ -98,4 +98,9 @@ public class DomeinController
 	{
 		spel.veranderKleur(kleurGetal, index);
 	}
+	
+	public String geefOverzichtHighscores()
+	{
+		return spel.geefOverzichtHighscores();
+	}
 }

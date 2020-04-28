@@ -16,7 +16,7 @@ public class ColorettoApplicatie
 		
 		//spel effectief spelen
 		int ronde=1;
-		while (!dc.isEindeSpel())
+		while (/*!dc.isEindeSpel()*/ronde !=3)
 		{
 			System.out.printf("Ronde %d%n", ronde);
 			speelRonde1(dc, aantalSpelers);
@@ -27,6 +27,7 @@ public class ColorettoApplicatie
 		//einde spel (joker + score)
 		jokerInstellen(dc, aantalSpelers);
 		System.out.println(dc.geefEindOverzicht());
+		System.out.println(dc.geefOverzichtHighscores());
 	}	
 
 	

@@ -4,6 +4,8 @@ import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
 
+import persistentie.scoreMapper;
+
 public class Spel 
 {
 	private String naam;
@@ -14,7 +16,7 @@ public class Spel
 	private List<Kaart> deckKaarten= new ArrayList <Kaart>();
 	private List<StapelRij> stapelRijen	= new ArrayList <StapelRij>();
 	private List<Speler> spelerLijst = new ArrayList<Speler>();
-
+	private scoreMapper scoreMap = new scoreMapper();
 	
 	public Spel(String naam, int aantalSpelers)
 	{
@@ -307,6 +309,18 @@ public class Spel
 		spelerLijst.get(index).veranderJoker(kleur);
 	}
 
+	public String geefOverzichtHighscores()
+	{
+		List<Speler> spelers = scoreMap.geefScorebord();
+		String result="";
+		
+		for (Speler speler : spelers)
+		{
+			result += String.format("%s %15d", speler.getNaam(), speler.getScore());
+		}
+		
+		return result;
+	}
 	
 	public String getNaam() {
 		return naam;
