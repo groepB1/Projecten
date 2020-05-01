@@ -22,6 +22,12 @@ public class ColorettoApplicatie
 			speelRonde1(dc, aantalSpelers);
 			speelRonde2En3(dc, aantalSpelers);
 			ronde++;
+			
+			//test opslaanSpel
+			System.out.println("geef 9999 in om het spel op te slaan en te stoppen. geef iets anders in om door te gaan. ");
+			int stoppen = invoer.nextInt();
+			if (stoppen == 9999)
+				dc.opslaanSpel();
 		}
 		
 		//einde spel (joker + score)

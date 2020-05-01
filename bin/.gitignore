@@ -1,1 +1,9 @@
-/images/
+/domein/
+/ui/
+/persistentie/
+/coloretto_2_highscores.sql
+/coloretto_2_kaarten.sql
+/coloretto_2_routines.sql
+/coloretto_2_spel.sql
+/coloretto_2_speler.sql
+/coloretto_2_spelerkaarten.sql

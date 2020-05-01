@@ -146,6 +146,14 @@ public class Speler
 	public void setScore(int score) {
 		this.score = score;
 	}
+	public List<Kaart> getKaartLijstSpeler() {
+		return kaartLijstSpeler;
+	}
+
+
+	public void setKaartLijstSpeler(List<Kaart> kaartLijstSpeler) {
+		this.kaartLijstSpeler = kaartLijstSpeler;
+	}
 
 
 	public String toString()

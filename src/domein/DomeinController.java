@@ -103,4 +103,9 @@ public class DomeinController
 	{
 		return spel.geefOverzichtHighscores();
 	}
+	
+	public boolean opslaanSpel()
+	{
+		return spel.spelOpslaan();
+	}
 }

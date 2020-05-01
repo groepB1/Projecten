@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import persistentie.scoreMapper;
+import persistentie.spelMapper;
 
 public class Spel 
 {
@@ -17,6 +18,7 @@ public class Spel
 	private List<StapelRij> stapelRijen	= new ArrayList <StapelRij>();
 	private List<Speler> spelerLijst = new ArrayList<Speler>();
 	private scoreMapper scoreMap = new scoreMapper();
+	private spelMapper spelMap = new spelMapper();
 	
 	public Spel(String naam, int aantalSpelers)
 	{
@@ -323,6 +325,99 @@ public class Spel
 		
 		return result;
 	}
+	
+	public boolean spelOpslaan()
+	{
+		//spelopslaan
+		int spelid = spelMap.voegSpelToe(this);
+		
+		//speleropslaan
+		for (int teller = 0; teller <= spelerLijst.size()-1; teller++)
+		{
+			Speler speler = spelerLijst.get(teller);
+			spelMap.voegSpelerToe(speler, spelid, teller);
+		}
+		
+		// kaartendeck opslaan
+		int [] aantalKaartenInDeck = telKaarten(deckKaarten);
+		for (int teller = 0; teller <= 8; teller++)
+		{
+			spelMap.voegKaartDeck(bepaalKleurKaart(teller),aantalKaartenInDeck[teller],spelid);
+		}
+		
+		/*//stapelrijen opslaan
+		for (int teller = 0; teller<=stapelRijen.size()-1; teller++)
+		{spelMap.voegStapelRijToe(teller, spelid);}
+		
+		//kaarten per stapelrij opslaan
+		for (int teller = 0 ; teller <= stapelRijen.size()-1; teller++)
+		{
+			int[] aantalKaartenPerStapel = telKaarten(stapelRijen.get(teller).getKaartenPerRij());
+			for (int teller2 = 0; teller2 <= aantalKaartenPerStapel.length-1; teller2++)
+			{
+				spelMap.voegKaartenPerRijToe(bepaalKleurKaart(teller2), aantalKaartenPerStapel[teller2], spelid, teller);
+			}
+		}*/
+		
+		//kaarten van speler opslaan
+		
+		
+		for (int teller = 0 ; teller <= spelerLijst.size()-1; teller++)
+		{
+			int[] aantalKaartenPerSpeler = telKaarten(spelerLijst.get(teller).getKaartLijstSpeler());
+			for (int teller2 = 0; teller2 <= aantalKaartenPerSpeler.length-1; teller2++)
+			{
+				spelMap.voegKaartenSpelersToe(bepaalKleurKaart(teller2), aantalKaartenPerSpeler[teller2], spelid, teller);
+			}
+		}
+		return true;
+		
+	}
+	
+	
+	private String bepaalKleurKaart(int teller)
+	{
+		String kleur = "";
+		switch (teller) 
+		{
+			case 0: ; kleur = "oranje"; break;
+			case 1: kleur = "blauw" ;break;
+			case 2: kleur = "rood";break;
+			case 3: kleur = "geel";break;
+			case 4: kleur = "grijs";break;
+			case 5: kleur = "groen";break;
+			case 6: kleur = "roos";break;
+			case 7: kleur = "plus 2";break;
+			case 8: kleur = "joker";break;
+		}
+		return kleur;
+	}
+	private int[] telKaarten(List<Kaart> kaartenLijst)
+	{
+		int  aantalPlus2 = 0, aantalOranje = 0, aantalBlauw = 0, aantalGeel = 0, aantalRood = 0, aantalGroen = 0, aantalGrijs = 0, aantalRoos = 0, aantalJoker=0;
+		
+		for (int teller = 0; teller <= kaartenLijst.size()-1; teller++)
+		{
+			Kaart kaart = kaartenLijst.get(teller);
+			
+			switch (kaart.getKleur()) 
+			{
+				case "oranje": aantalOranje++ ; break;
+				case "blauw": aantalBlauw++; break;
+				case "rood": aantalRood++ ; break;
+				case "geel": aantalGeel++; break;
+				case "grijs": aantalGrijs++ ; break;
+				case "groen": aantalGroen++; break;
+				case "roos": aantalRoos++; break;
+				case "plus 2": aantalPlus2++; break; 
+				case "joker": aantalJoker++; break;
+			}
+		}
+		int [] array = {aantalOranje, aantalBlauw, aantalRood,aantalGeel, aantalGrijs,aantalGroen, aantalRoos,aantalPlus2, aantalJoker};
+		return array;
+		
+	}
+	
 	
 	public String getNaam() {
 		return naam;
