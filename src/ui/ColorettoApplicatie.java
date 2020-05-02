@@ -9,27 +9,52 @@ public class ColorettoApplicatie
 	
 	public ColorettoApplicatie(DomeinController dc)
 	{
-		//spel klaarzetten
-		String Spelnaam=geefSpelNaamIn(dc);
-		int aantalSpelers = geefSpelersIn(dc, Spelnaam);
-		System.out.println(geefSpelerNamenIn(aantalSpelers, dc));
+		int aantalSpelers=0;
+		System.out.println("geef 1 in om het vorige spel te hervatten. Geef 2 om om een nieuw spel te starten.");
+		int startNieuwSpelOfSpelHervatten = invoer.nextInt();
 		
-		//spel effectief spelen
-		int ronde=1;
-		while (/*!dc.isEindeSpel()*/ronde !=3)
+		if (startNieuwSpelOfSpelHervatten ==1)
 		{
-			System.out.printf("Ronde %d%n", ronde);
-			speelRonde1(dc, aantalSpelers);
-			speelRonde2En3(dc, aantalSpelers);
-			ronde++;
+			int ronde = 0;
+			dc.zetVorigSpelKlaar();
+			while (/*!dc.isEindeSpel()*/ronde !=3)
+			{
+				System.out.printf("Ronde %d%n", ronde);
+				speelRonde1(dc, aantalSpelers);
+				speelRonde2En3(dc, aantalSpelers);
+				ronde++;
+				
+				//test opslaanSpel
+				System.out.println("geef 9999 in om het spel op te slaan en te stoppen. geef iets anders in om door te gaan. ");
+				int stoppen = invoer.nextInt();
+				if (stoppen == 9999)
+					dc.opslaanSpel();
+			}
 			
-			//test opslaanSpel
-			System.out.println("geef 9999 in om het spel op te slaan en te stoppen. geef iets anders in om door te gaan. ");
-			int stoppen = invoer.nextInt();
-			if (stoppen == 9999)
-				dc.opslaanSpel();
 		}
-		
+		else if (startNieuwSpelOfSpelHervatten == 2) 
+		{
+			//spel klaarzetten
+			String Spelnaam=geefSpelNaamIn(dc);
+			aantalSpelers = geefSpelersIn(dc, Spelnaam);
+			System.out.println(geefSpelerNamenIn(aantalSpelers, dc));
+			
+			//spel effectief spelen
+			int ronde=1;
+			while (/*!dc.isEindeSpel()*/ronde !=3)
+			{
+				System.out.printf("Ronde %d%n", ronde);
+				speelRonde1(dc, aantalSpelers);
+				speelRonde2En3(dc, aantalSpelers);
+				ronde++;
+				
+				//test opslaanSpel
+				System.out.println("geef 9999 in om het spel op te slaan en te stoppen. geef iets anders in om door te gaan. ");
+				int stoppen = invoer.nextInt();
+				if (stoppen == 9999)
+					dc.opslaanSpel();
+			}
+		}
 		//einde spel (joker + score)
 		jokerInstellen(dc, aantalSpelers);
 		System.out.println(dc.geefEindOverzicht());
@@ -40,7 +65,7 @@ public class ColorettoApplicatie
 	public String geefSpelNaamIn(DomeinController dc)
 	{
 		System.out.println("geef een spelnaam In");
-		String Spelnaam = invoer.nextLine();
+		String Spelnaam = invoer.next();
 		return Spelnaam;
 	}
 	

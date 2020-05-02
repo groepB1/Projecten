@@ -28,6 +28,27 @@ public class Spel
 		setStapelRijen(maakStapelRijAan());
 	}
 	
+	public Spel()
+	{
+		//spel aanmaken
+		setNaam(spelMap.LaadSpelNaam());
+		setVorigeSpelerIndex(spelMap.laadVorigeSpeler());
+		//kaartendeck aanmaken
+		deckKaarten = spelMap.laadKaarten();
+		//spelersAanmaken
+		spelerLijst = spelMap.LaadSpelers();
+		setAantalSpelers(spelerLijst.size());
+		//kaarten spelers toeveogen
+		for (int teller = 0; teller <=spelerLijst.size()-1; teller++)
+		{
+			spelerLijst.get(teller).setKaartLijstSpeler(spelMap.laadSpelerKaarten(teller));
+		}
+		//stapelrijenAanmaken
+		setStapelRijen(maakStapelRijAan());
+		
+		zetAllesKlaarVoorBeginRonde();
+	}
+
 
 	public List<Kaart> maakDeckAan()
 	{
@@ -72,7 +93,7 @@ public class Spel
 	
 	public  List<StapelRij> maakStapelRijAan() 
 	{
-		List<StapelRij> stapelRij	= new ArrayList <StapelRij>();
+		List<StapelRij> stapelRij	= new ArrayList <>();
 		
 		for (int teller = 0; teller <= aantalSpelers-1; teller++)
 		{
@@ -417,7 +438,7 @@ public class Spel
 		return array;
 		
 	}
-	
+		
 	
 	public String getNaam() {
 		return naam;
@@ -447,5 +468,15 @@ public class Spel
 	public List<Speler> getSpelerLijst() {
 		return spelerLijst;
 	}
+
+	public int getVorigeSpelerIndex() {
+		return vorigeSpelerIndex;
+	}
+
+	public void setVorigeSpelerIndex(int vorigeSpelerIndex) {
+		this.vorigeSpelerIndex = vorigeSpelerIndex;
+	}
+	
+	
 }
 

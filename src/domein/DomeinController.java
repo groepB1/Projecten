@@ -108,4 +108,8 @@ public class DomeinController
 	{
 		return spel.spelOpslaan();
 	}
+	public void zetVorigSpelKlaar()
+	{
+		spel = new Spel();
+	}
 }
