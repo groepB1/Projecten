@@ -26,6 +26,7 @@ public class Spel
 		setAantalSpelers(aantalSpelers);
 		setDeckKaarten(maakDeckAan());
 		setStapelRijen(maakStapelRijAan());
+		setAantalSpelers(aantalSpelers);
 	}
 	
 	public Spel()
