@@ -366,22 +366,6 @@ public class Spel
 			spelMap.voegKaartDeck(bepaalKleurKaart(teller),aantalKaartenInDeck[teller],spelid);
 		}
 		
-		/*//stapelrijen opslaan
-		for (int teller = 0; teller<=stapelRijen.size()-1; teller++)
-		{spelMap.voegStapelRijToe(teller, spelid);}
-		
-		//kaarten per stapelrij opslaan
-		for (int teller = 0 ; teller <= stapelRijen.size()-1; teller++)
-		{
-			int[] aantalKaartenPerStapel = telKaarten(stapelRijen.get(teller).getKaartenPerRij());
-			for (int teller2 = 0; teller2 <= aantalKaartenPerStapel.length-1; teller2++)
-			{
-				spelMap.voegKaartenPerRijToe(bepaalKleurKaart(teller2), aantalKaartenPerStapel[teller2], spelid, teller);
-			}
-		}*/
-		
-		//kaarten van speler opslaan
-		
 		
 		for (int teller = 0 ; teller <= spelerLijst.size()-1; teller++)
 		{
@@ -401,7 +385,7 @@ public class Spel
 		String kleur = "";
 		switch (teller) 
 		{
-			case 0: ; kleur = "oranje"; break;
+			case 0: kleur = "oranje"; break;
 			case 1: kleur = "blauw" ;break;
 			case 2: kleur = "rood";break;
 			case 3: kleur = "geel";break;

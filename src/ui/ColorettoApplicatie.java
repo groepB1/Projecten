@@ -10,6 +10,7 @@ public class ColorettoApplicatie
 	public ColorettoApplicatie(DomeinController dc)
 	{
 		int aantalSpelers=0;
+		boolean spelOpgeslagen = false;
 		System.out.println("geef 1 in om het vorige spel te hervatten. Geef 2 om om een nieuw spel te starten.");
 		int startNieuwSpelOfSpelHervatten = invoer.nextInt();
 		
@@ -17,10 +18,15 @@ public class ColorettoApplicatie
 		{
 			int ronde = 0;
 			dc.zetVorigSpelKlaar();
-			while (/*!dc.isEindeSpel()*/ronde !=3)
+			aantalSpelers = dc.geefAantalSpelers();
+			System.out.println(dc.geefOverzichtVanAlleSpelers());
+			while (/*!dc.isEindeSpel()*/ronde !=1)
 			{
 				System.out.printf("Ronde %d%n", ronde);
-				speelRonde1(dc, aantalSpelers);
+				for (int teller =0; teller<aantalSpelers; teller++)
+				{
+					startRondeAndereSpelers(dc);
+				}	
 				speelRonde2En3(dc, aantalSpelers);
 				ronde++;
 				
@@ -28,7 +34,12 @@ public class ColorettoApplicatie
 				System.out.println("geef 9999 in om het spel op te slaan en te stoppen. geef iets anders in om door te gaan. ");
 				int stoppen = invoer.nextInt();
 				if (stoppen == 9999)
+				{
 					dc.opslaanSpel();
+					spelOpgeslagen=true;
+					break;
+				}
+				
 			}
 			
 		}
@@ -52,13 +63,25 @@ public class ColorettoApplicatie
 				System.out.println("geef 9999 in om het spel op te slaan en te stoppen. geef iets anders in om door te gaan. ");
 				int stoppen = invoer.nextInt();
 				if (stoppen == 9999)
+				{
 					dc.opslaanSpel();
+					spelOpgeslagen=true;
+					break;
+				}
+				
 			}
 		}
+		
 		//einde spel (joker + score)
-		jokerInstellen(dc, aantalSpelers);
-		System.out.println(dc.geefEindOverzicht());
-		System.out.println(dc.geefOverzichtHighscores());
+		if (spelOpgeslagen)
+			System.out.println("spel is opgeslaan");
+		
+		else 
+		{
+			jokerInstellen(dc, aantalSpelers);
+			System.out.println(dc.geefEindOverzicht());
+			System.out.println(dc.geefOverzichtHighscores());
+		}
 	}	
 
 	
@@ -192,4 +215,6 @@ public class ColorettoApplicatie
 		}
 		
 		}
+	
+	
 	}

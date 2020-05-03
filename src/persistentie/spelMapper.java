@@ -156,7 +156,7 @@ public class spelMapper
 		List<Speler> spelers = new ArrayList<>();
 		try (Connection conn = DriverManager.getConnection(MapperConfig.JDBC_URL))
 		 {
-			PreparedStatement querygeefSpeler = conn.prepareStatement("SELECT * FROM speler ORDER  BY idspel DESC;");
+			PreparedStatement querygeefSpeler = conn.prepareStatement("SELECT * FROM speler ORDER  BY idspel DESC, idspeler ASC;");
 			try(ResultSet rs = querygeefSpeler.executeQuery())
 			{
 				int id=0;
@@ -222,8 +222,8 @@ public class spelMapper
 		List<Kaart> spelerKaarten = new ArrayList<>();
 		try (Connection conn = DriverManager.getConnection(MapperConfig.JDBC_URL))
 		 {
-			PreparedStatement querygeefSpelerKaarten = conn.prepareStatement("SELECT * FROM spelerkaarten where idSpeler = 1 ORDER  BY idspel DESC;");
-			
+			PreparedStatement querygeefSpelerKaarten = conn.prepareStatement("SELECT * FROM spelerkaarten where idSpeler = ? ORDER  BY idspel DESC;");
+			querygeefSpelerKaarten.setInt(1, spelerid);
 			try(ResultSet rs = querygeefSpelerKaarten.executeQuery())
 			{
 				int id=0;

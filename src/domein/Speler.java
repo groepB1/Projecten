@@ -90,14 +90,14 @@ public class Speler
 	
 	public boolean heeftJoker()
 	{
-		int aantalJokers = 0;
+		boolean heefJoker = false;
 		for (int teller =0; teller<= kaartLijstSpeler.size()-1; teller++)
 		{
 			Kaart kaart = kaartLijstSpeler.get(teller);
-			if (kaart.getKleur() == "joker")
-				aantalJokers++;
+			if (kaart.getKleur().equals("joker"))
+				heefJoker = true;
 		}
-		return aantalJokers !=0;
+		return heefJoker;
 	}
 	
 	
@@ -107,7 +107,7 @@ public class Speler
 		for (int teller =0; teller<= kaartLijstSpeler.size()-1; teller++)
 		{
 			Kaart kaart = kaartLijstSpeler.get(teller);
-			if (kaart.getKleur() == "joker")
+			if (kaart.getKleur().equals("joker"))
 				aantalJokers++;
 		}
 		return aantalJokers;

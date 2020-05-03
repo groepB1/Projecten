@@ -112,4 +112,8 @@ public class DomeinController
 	{
 		spel = new Spel();
 	}
+	public int geefAantalSpelers()
+	{
+		return spel.getAantalSpelers();
+	}
 }
