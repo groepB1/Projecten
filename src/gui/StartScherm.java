@@ -32,7 +32,7 @@ public class StartScherm  extends GridPane
 	
 	public StartScherm(DomeinController dc)
 	{
-		this.cs = cs;
+
 		this.dc = dc;
 		BuildGui();
 		
@@ -40,11 +40,15 @@ public class StartScherm  extends GridPane
 	
 	private void BuildGui()
 	{
+		//lay out van de pagina
 		this.setPadding(new Insets(10, 10, 10, 10));
 		this.setVgap(10);
 		this.setHgap(10);
 		this.setAlignment(Pos.CENTER);
-		this.setBackground(new Background(new BackgroundFill(Color.LIGHTBLUE, null, null)));
+		
+		//achtergrond kleur
+		this.setBackground(new Background(new BackgroundFill(Color.LIGHTGREEN, null, null)));
+		
 		//titel van startscherm
 		Label lblColoretto = new Label("COLORETTO");
 		lblColoretto.setFont(Font.font("Tahoma", FontWeight.BOLD, 40));
@@ -55,28 +59,7 @@ public class StartScherm  extends GridPane
 		Button btnStartNieuwSpel = new Button("START NIEUW SPEL");
 		btnStartNieuwSpel.setAlignment(Pos.CENTER);
 		this.add(btnStartNieuwSpel, 2, 3);
-		btnStartNieuwSpel.setOnAction(new EventHandler<ActionEvent>()
-				{
-
-					@Override
-					public void handle(ActionEvent event) //action event om het configuratiescherm op te roepen
-					{
-					cs = new ConfiguratieScherm(dc);
-					Scene scene = new Scene(cs, 500, 200);
-					Stage stage = (Stage)(getScene().getWindow());
-					stage.setScene(scene);
-					stage.show();
-					
-						
-					/*cs = new ConfiguratieScherm(dc);
-					Scene scene = new Scene(cs,  500, 200);
-					Stage stage = new Stage();
-					stage.setScene(scene);
-					stage.show();*/
-					}
-			
-				}
-				);
+	
 		
 		// button om huidig spel verder te zetten
 		Button btnHuidigSpel = new Button("HERVAT HUIDIG SPEL");
@@ -91,6 +74,24 @@ public class StartScherm  extends GridPane
 		Spel.getItems().add(exit);
 		this.setAlignment(Pos.TOP_LEFT);
 		this.add(menu, 0, 0);
+		
+		
+		//ActionEvents van Button startNieuwSpel en menuItem 'afsluiten'
+		btnStartNieuwSpel.setOnAction(new EventHandler<ActionEvent>()
+		{
+
+			@Override
+			public void handle(ActionEvent event) //action event om het configuratiescherm op te roepen
+			{
+			cs = new ConfiguratieScherm(dc);
+			Scene scene = new Scene(cs, 500, 200);
+			Stage stage = (Stage)(getScene().getWindow());
+			stage.setScene(scene);
+			stage.show();
+			}
+	
+		}
+		);
 		
 		exit.setOnAction(new EventHandler<ActionEvent>()
 				{

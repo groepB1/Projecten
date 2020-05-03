@@ -28,12 +28,18 @@ public class StapelScherm extends VBox
 	public void BuildGui()
 	{
 		this.setPadding(new Insets(10, 10, 10, 10));
-		this.setBackground(new Background(new BackgroundFill(Color.LIGHTBLUE, null, null)));
+		this.setBackground(new Background(new BackgroundFill(Color.CORAL, null, null)));
 		
 		Label lblTitel = new Label("Overzicht van de stapel");
 		
 		TextArea overzichtStapels = new TextArea();
 		overzichtStapels.setText(dc.geefOverzichtVanStapelRij());
+		
+		if(dc.isEindeRonde())
+		{
+			dc.zetAllesKlaarVoorBeginRonde();
+			overzichtStapels.setText(dc.geefOverzichtVanStapelRij());
+		}
 		
 		Button btnTerug = new Button("terug");
 		btnTerug.setOnAction(new EventHandler<ActionEvent>() 

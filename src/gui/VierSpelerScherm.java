@@ -1,5 +1,7 @@
 package gui;
 
+import java.awt.TextArea;
+
 import domein.DomeinController;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -24,20 +26,24 @@ import javafx.stage.Stage;
 public class VierSpelerScherm extends GridPane
 {
 	private DomeinController dc;
+	private ConfiguratieScherm cs;
+
 	
 	public VierSpelerScherm(DomeinController dc)
 	{
 		this.dc = dc;
-		BuildGui();
+		buildGui();
 	}
 	
-	public void BuildGui()
+	public void buildGui()
 	{
+		//layout van het scherm
 		this.setPadding(new Insets(10, 10, 10, 10));
 		this.setVgap(10);
 		this.setHgap(10);
 		this.setBackground(new Background(new BackgroundFill(Color.LIGHTBLUE, null, null)));
 		
+		//menu om terug te gaan of spel te sluiten
 		MenuBar menu = new MenuBar();
 		Menu Spel = new Menu("Spel");
 		MenuItem exit = new MenuItem("Sluiten");
@@ -46,35 +52,9 @@ public class VierSpelerScherm extends GridPane
 		Spel.getItems().addAll(terug, exit);
 		this.setAlignment(Pos.TOP_LEFT);
 		this.add(menu, 0, 0);
-		terug.setOnAction(new EventHandler<ActionEvent>()
-					{
-
-						@Override
-						public void handle(ActionEvent event) 
-						{
-							ConfiguratieScherm cs = new ConfiguratieScherm(dc);
-							Scene scene = new Scene(cs, 500, 200);
-							Stage stage = (Stage)(getScene().getWindow());
-							stage.setScene(scene);
-							stage.show();
-							
-						}
-						
-					}
-				);
-		exit.setOnAction(new EventHandler<ActionEvent>()
-				{
-
-					@Override
-					public void handle(ActionEvent event) 
-					{
-						Platform.exit();
-						
-					}
-			
-				}
-		);
 		
+		
+	
 		Label lblTitel = new Label("GEEF DE NAMEN IN VAN ALLE SPELERS."); //titel van het scherm
 		lblTitel.setFont(Font.font("Tahoma", FontWeight.BOLD, 20));
 		lblTitel.setAlignment(Pos.TOP_CENTER);
@@ -83,9 +63,11 @@ public class VierSpelerScherm extends GridPane
 		Label s1 = new Label("Speler 1"); // labels met de spelers
 		this.add(s1, 1, 1); //beginnend vanaf eerste rij , eerste kolom van de GridPane
 		
+		
 		TextField txfSpeler1 = new TextField();
 		txfSpeler1.setPromptText("naam");
 		this.add(txfSpeler1, 2, 1);
+	
 		
 		Label s2 = new Label("Speler 2");
 		this.add(s2, 1, 3);
@@ -93,6 +75,7 @@ public class VierSpelerScherm extends GridPane
 		TextField txfSpeler2 = new TextField();
 		txfSpeler2.setPromptText("naam");
 		this.add(txfSpeler2, 2, 3);
+	
 		
 		Label s3 = new Label("Speler 3");
 		this.add(s3, 1, 5);
@@ -101,16 +84,51 @@ public class VierSpelerScherm extends GridPane
 		txfSpeler3.setPromptText("naam");
 		this.add(txfSpeler3, 2, 5);
 		
+		
 		Label s4 = new Label("Speler 4");
 		this.add(s4, 1, 7);
 		
+		//tekstveld om speler in te geven
 		TextField txfSpeler4 = new TextField();
 		txfSpeler4.setPromptText("naam");
 		this.add(txfSpeler4, 2, 7);
 		
+		//button om spel te starten
 		Button btnStartSpel = new Button("START SPELEN");
 		this.add(btnStartSpel, 3, 9);
 		
+		
+		
+		
+		//action events van buttons terug, exit en startspel
+		terug.setOnAction(new EventHandler<ActionEvent>()
+		{
+
+			@Override
+			public void handle(ActionEvent event) 
+			{
+				ConfiguratieScherm cs = new ConfiguratieScherm(dc);
+				Scene scene = new Scene(cs, 500, 200);
+				Stage stage = (Stage)(getScene().getWindow());
+				stage.setScene(scene);
+				stage.show();
+				
+			}
+			
+			}
+		);
+		exit.setOnAction(new EventHandler<ActionEvent>()
+		{
+
+		@Override
+		public void handle(ActionEvent event) 
+		{
+			Platform.exit();
+			
+		}
+
+		}
+		);
 		btnStartSpel.setOnAction(new EventHandler<ActionEvent>()
 		{
 
@@ -118,21 +136,23 @@ public class VierSpelerScherm extends GridPane
 			public void handle(ActionEvent btnStartSpel) 
 			{	
 				SpeelScherm spel = new SpeelScherm(dc);
+				
 				Scene scene = new Scene(spel, 1200, 500);
 				Stage stage = (Stage)(getScene().getWindow());
 				stage.setScene(scene);
 				stage.show();
-				
 				
 				dc.geefSpelerNaamIn(txfSpeler1.getText());
 				dc.geefSpelerNaamIn(txfSpeler2.getText());
 				dc.geefSpelerNaamIn(txfSpeler3.getText());
 				dc.geefSpelerNaamIn(txfSpeler4.getText());
 				
+				
 			}
 			
 		});
 	}
+
 	
 
 }

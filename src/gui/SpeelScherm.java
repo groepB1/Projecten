@@ -26,15 +26,13 @@ import javafx.stage.Stage;
 
 public class SpeelScherm extends GridPane
 {
-	private DomeinController dc;;
-	private ImageView getrokkenKaart;
+	private DomeinController dc;
 	private Label lblgetrokkenKaart;
 	private ImageView kaart;
 	private CheckBox cbrij1;
 	private CheckBox cbrij2;
 	private CheckBox cbrij3;
 	private CheckBox cbrij4;
-	private TextArea txaSpelerAanZet;
 	private ImageView blauw;
 	private ImageView geel;
 	private ImageView grijs;
@@ -44,77 +42,251 @@ public class SpeelScherm extends GridPane
 	private ImageView plus2;
 	private ImageView rood;
 	private ImageView roos;
+	private Button btnLegOp;
+	private Button btnNeemStapel;
+	private Alert speler;
+	private Button btnscore;
+	private Button btnjoker;
 	
 	public SpeelScherm(DomeinController dc)
 	{
 		this.dc = dc;
-		BuildGui();
-	
-		
+		buildGui();
 	}
-	public void BuildGui()
+	
+	public void buildGui()
 	{
+		//layout van scherm
 		this.setVgap(20);
 		this.setHgap(20);
-		this.setBackground(new Background(new BackgroundFill(Color.LIGHTBLUE, null, null)));
+		this.setBackground(new Background(new BackgroundFill(Color.LIGHTGOLDENRODYELLOW, null, null))); //layout van de scene
 		
+		//menu 
 		MenuBar menu = new MenuBar(); //menu om het speler overzicht op te vragen
 		Menu Spel = new Menu("Spel");
 		MenuItem overzicht = new MenuItem("Speler overzicht");
-		MenuItem exit = new MenuItem("Spel afsluiten");
+		MenuItem exit = new MenuItem("Spel afsluiten"); //menu om het spel af te sluiten
 		menu.getMenus().add(Spel);
 		Spel.getItems().addAll(overzicht, exit);
 		this.add(menu, 0,  0);
 		
-		
-		Label lblTitel = new Label("COLLORETTO");
+		//titel
+		Label lblTitel = new Label("COLLORETTO"); // een titel van het spel
 		lblTitel.setFont(Font.font("verdana", FontWeight.BOLD,30));
-		this.add(lblTitel, 2, 1);
+		this.add(lblTitel, 1, 1);
+		
+		//button om de speler aan zet te zien
+		Button btnSpeler = new Button("Speler aan zet");
+		this.add(btnSpeler, 3, 1);
+		
+		Label lblmessage = new Label("Ga eerst kijken welke speler aan zet is voor je start.");
+		this.add(lblmessage, 2, 1);
 		
 		
-		
-		exit.setOnAction(new EventHandler<ActionEvent>()
-				{
-
-					@Override
-					public void handle(ActionEvent arg0) 
-					{
-						Platform.exit();
-						
-					}
-				
-				});
-		
-		overzicht.setOnAction(new EventHandler<ActionEvent>()
-				{
-					@Override
-					public void handle(ActionEvent event) 
-					{
-						OverzichtScherm os = new OverzichtScherm(dc); // oproepen overzichtscherm
-						Scene scene = new Scene(os, 400, 300);
-						Stage stage = new Stage();
-						stage.setScene(scene);
-						stage.show();
-						
-					}
-			
-				});
-		
-		System.out.println(dc.geefEersteSpelerAanZetWeer());
-		TextArea txaSpelerAanZet = new TextArea(dc.geefEersteSpelerAanZetWeer());
-		this.add(txaSpelerAanZet, 3, 1);
 
 	
-		Label lblgk = new Label("De getrokken kaart is: ");
+		Label lblgk = new Label("De getrokken kaart is: "); //getrokken kaart wordt weergegeven op het scherm
 		this.add(lblgk, 2, 3);
+		
 		Label lblgetrokkenKaart = new Label(dc.geefGetrokkenKaartWeer());
 		this.add(lblgetrokkenKaart, 3, 3);
 		
+		
+		//button om score scherm op te roepen bij einde spel
+		btnscore = new Button("Scores");
+		this.add(btnscore, 6, 7);
+		
+		//button om jokerscherm op te roepen bij einde spel
+		btnjoker = new  Button("Jokers");
+		this.add(btnjoker, 3, 7);
+	
+	
+	
+		//checkboxen van de stapels
+		cbrij1 = new CheckBox("Eerste stapel"); 
+		this.add(cbrij1, 3, 4);
+		cbrij2 = new CheckBox("Tweede stapel");
+		this.add(cbrij2, 4, 4);
+		cbrij3 = new CheckBox("Derde stapel");
+		this.add(cbrij3, 5, 4);
+		cbrij4 = new CheckBox("Vierde stapel");
+		this.add(cbrij4, 6, 4);
+		
+		//button om een kaart op te leggen
+		btnLegOp = new Button("Leg op een stapel"); //button om op stapel te leggen
+		this.add(btnLegOp, 3, 5);
+		
+		//button om een stapel te nemen
+		btnNeemStapel = new Button("Kies een stapel en neem ze");
+		this.add(btnNeemStapel, 6, 5);
+		
+					
+				
+		//action events voor buttons: speler, exit, overzicht, leg op, neem stapel, jokerscherm, scorescherm
+		btnSpeler.setOnAction(new EventHandler<ActionEvent>()
+		{
+
+			@Override
+			public void handle(ActionEvent arg0) 
+			{
+				speler = new Alert(Alert.AlertType.INFORMATION);
+				speler.setTitle("De speler aan zet is: ");
+				speler.setHeaderText(dc.geefEersteSpelerAanZetWeer()); //geeft de beginspeler weer
+				speler.showAndWait();
+			
+			}
+	
+		});
+		
+		exit.setOnAction(new EventHandler<ActionEvent>()
+		{
+
+			@Override
+			public void handle(ActionEvent arg0) 
+			{
+				Platform.exit();
+				
+			}
+		
+		});
+
+		overzicht.setOnAction(new EventHandler<ActionEvent>()
+		{
+			@Override
+			public void handle(ActionEvent event) 
+			{
+				OverzichtScherm os = new OverzichtScherm(dc); // oproepen overzichtscherm
+				Scene scene = new Scene(os, 400, 300);
+				Stage stage = new Stage();
+				stage.setScene(scene);
+				stage.show();
+				
+			}
+	
+		});
+		btnLegOp.setOnAction(new EventHandler<ActionEvent>()
+		{
+
+			@Override
+			public void handle(ActionEvent event) 
+			{
+				int stapelID = keuzeRij();
+				
+				dc.voegKaartAanStapelToe(stapelID); //methode om kaart te te voegen aan de rijen
+				
+				
+				cbrij1.setSelected(false);
+				cbrij2.setSelected(false);
+				cbrij3.setSelected(false);
+				cbrij4.setSelected(false);
+				
+				StapelScherm sts = new StapelScherm(dc); //overzichtscherm van de rijen worden getoont
+				Scene scene = new Scene(sts, 400, 300);
+				Stage stage = new Stage();
+				stage.setScene(scene);
+				stage.show();
+				
+				lblgetrokkenKaart.setText(dc.geefGetrokkenKaartWeer()); //update van de getrokken kaart na het leggen
+				speler.setHeaderText(dc.geefSpelerAanZetWeer());//update van de speler aan zet
+				
+				
+			}
+	
+		});
+
+		btnNeemStapel.setOnAction(new EventHandler<ActionEvent>() 
+		{
+
+			@Override
+			public void handle(ActionEvent event) 
+			{
+				
+				int stapelID = keuzeRij();
+				
+				
+				cbrij1.setSelected(false);
+				cbrij2.setSelected(false);
+				cbrij3.setSelected(false);
+				cbrij4.setSelected(false);
+				
+				dc.neemStapelRij(stapelID); //methode om een stapel te nemen
+				StapelScherm sts = new StapelScherm(dc);
+				Scene scene = new Scene(sts, 400, 300);
+				Stage stage = new Stage();
+				stage.setScene(scene);
+				stage.show();
+				
+				lblgetrokkenKaart.setText(dc.geefGetrokkenKaartWeer()); //terug een update van de getrokken kaart
+				speler.setHeaderText(dc.geefSpelerAanZetWeer()); //terug een update van de speler aan zet
+				
+				//als de ronde afgelopen is krijg je een alertscherm die je vertelt dat een nieuwe ronde van start gaat 
+				
+					if(dc.isEindeRonde())
+					{
+					Alert startRonde = new Alert(Alert.AlertType.INFORMATION);
+					startRonde.setTitle("Beste spelers");
+					startRonde.setHeaderText("Een nieuwe ronde gaat van start!");
+					startRonde.showAndWait();
+					
+					dc.zetAllesKlaarVoorBeginRonde();
+					}
+				
+					else if(dc.isEindeSpel())
+					{
+				
+				
+						Alert einde = new Alert(Alert.AlertType.INFORMATION);
+						einde.setHeaderText("Einde spel! Ga eerst de jokers bekijken en bekijk nadien jullie scores!");
+						einde.showAndWait();
+						
+						btnjoker.setOnAction(new EventHandler<ActionEvent>() //kan jokerscherm oproepen
+								{
+
+									@Override
+									public void handle(ActionEvent event) 
+									{
+										JokerScherm js = new JokerScherm(dc);
+										Scene scene = new Scene(js, 400, 500);
+										Stage stage = (Stage)(getScene().getWindow());
+										stage.setScene(scene);
+										stage.show();
+										
+									}
+							
+								});
+						
+								btnscore.setOnAction(new EventHandler<ActionEvent>() //kan het scorescherm oproepen
+								{
+
+									@Override
+									public void handle(ActionEvent event) 
+									{
+										ScoreScherm ss = new ScoreScherm(dc);
+										Scene scene = new Scene(ss, 400, 300);
+										Stage stage = (Stage)(getScene().getWindow());
+										stage.setScene(scene);
+										stage.show();
+										
+										
+									}
+							
+								
+								});
+					
+					}
+				
+				}
+			});
+		
+		
+		
+		
+					
+			
+		//afbeeldingen van kaarten gelijkstellen aan de kleur
+		
 		ImageView kaart = new ImageView();
-		kaart.setFitHeight(100);
-		kaart.setFitWidth(70);
-		this.add(kaart, 4, 3);
-		kaart.setVisible(false);
+		
 		
 		Image blauw = new  Image(getClass().getResourceAsStream("/images/blauw.jpg"));
 		Image geel = new  Image(getClass().getResourceAsStream("/images/geel.jpg"));
@@ -126,140 +298,45 @@ public class SpeelScherm extends GridPane
 		Image rood = new  Image(getClass().getResourceAsStream("/images/rood.png"));
 		Image Roos = new  Image(getClass().getResourceAsStream("/images/Roos.png"));
 		
-		if(lblgetrokkenKaart.getText().contentEquals("blauw"))
+		switch(lblgetrokkenKaart.getText())
 		{
+		case "blauw":
 			kaart.setImage(blauw);
-			kaart.setVisible(true);
-		}
-
-		else if(lblgetrokkenKaart.getText().contentEquals("geel"))
-		{
+			break;
+		case "geel":
 			kaart.setImage(geel);
-			kaart.setVisible(true);
-		}
-
-		else if(lblgetrokkenKaart.getText().contentEquals("grijs"))
-		{
+			break;
+		case "grijs":
 			kaart.setImage(grijs);
-			kaart.setVisible(true);
-		}
-
-		else if(lblgetrokkenKaart.getText().contentEquals("groen"))
-		{
+			break;
+		case "groen":
 			kaart.setImage(groen);
-			kaart.setVisible(true);
-		}
-
-		else if(lblgetrokkenKaart.getText().contentEquals("joker"))
-		{
+			break;
+		case "joker":
 			kaart.setImage(joker);
-			kaart.setVisible(true);
-		}
-
-		else if(lblgetrokkenKaart.getText().contentEquals("oranje"))
-		{
-			kaart.setImage(oranje);
-			kaart.setVisible(true);
-		}
-
-		else if(lblgetrokkenKaart.getText().contentEquals("plus 2"))
-		{
+			break;
+		case "plus 2":
 			kaart.setImage(plus2);
-			kaart.setVisible(true);
-		}
-
-		else if(lblgetrokkenKaart.getText().contentEquals("rood"))
-		{
+			break;
+		case "rood":
 			kaart.setImage(rood);
-			kaart.setVisible(true);
-		}
-
-		else if(lblgetrokkenKaart.getText().contentEquals("roos"))
-		{
+		case "roos":
 			kaart.setImage(Roos);
-			kaart.setVisible(true);
+			break;
+		case "oranje":
+			kaart.setImage(oranje);
+			break;
 		}
 		
+		kaart.setFitHeight(100);
+		kaart.setFitWidth(70);
+		this.add(kaart, 4, 3);
 		
 	
-	
-		cbrij1 = new CheckBox("Eerste stapel");
-		this.add(cbrij1, 3, 4);
-		cbrij2 = new CheckBox("Tweede stapel");
-		this.add(cbrij2, 4, 4);
-		cbrij3 = new CheckBox("Derde stapel");
-		this.add(cbrij3, 5, 4);
-		cbrij4 = new CheckBox("Vierde stapel");
-		this.add(cbrij4, 6, 4);
-		
-		Button btnLegOp = new Button("Leg op een stapel");
-		this.add(btnLegOp, 3, 5);
-		btnLegOp.setOnAction(new EventHandler<ActionEvent>()
-				{
-
-					@Override
-					public void handle(ActionEvent event) 
-					{
-						int stapelID = keuzeRij();
-						
-						dc.voegKaartAanStapelToe(stapelID);
-						
-						lblgetrokkenKaart.setText(dc.geefGetrokkenKaartWeer());
-						
-						
-						cbrij1.setSelected(false);
-						cbrij2.setSelected(false);
-						cbrij3.setSelected(false);
-						cbrij4.setSelected(false);
-						
-						StapelScherm sts = new StapelScherm(dc);
-						Scene scene = new Scene(sts, 400, 300);
-						Stage stage = new Stage();
-						stage.setScene(scene);
-						stage.show();
-					}
-			
-				});
-		
-		Button btnNeemStapel = new Button("Kies een stapel en neem ze");
-		this.add(btnNeemStapel, 6, 5);
-		btnNeemStapel.setOnAction(new EventHandler<ActionEvent>() 
-				{
-
-					@Override
-					public void handle(ActionEvent event) 
-					{
-						
-						int stapelID = keuzeRij();
-						
-						
-						lblgetrokkenKaart.setText(dc.geefGetrokkenKaartWeer());
-						
-						cbrij1.setSelected(false);
-						cbrij2.setSelected(false);
-						cbrij3.setSelected(false);
-						cbrij4.setSelected(false);
-						
-						dc.neemStapelRij(stapelID);
-						StapelScherm sts = new StapelScherm(dc);
-						Scene scene = new Scene(sts, 400, 300);
-						Stage stage = new Stage();
-						stage.setScene(scene);
-						stage.show();
-						
-					}
-			
-				}
-				);
-		
-		
-	
-		
-			
-			
 		
 		
 	}
+					
 	public int keuzeRij()
 	{
 		int stapelID=0;
@@ -283,7 +360,14 @@ public class SpeelScherm extends GridPane
 		
 		return stapelID;
 		
+	
+	
+
+	
 	}
+	
+
+	
 	
 
 

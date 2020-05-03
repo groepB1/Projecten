@@ -5,6 +5,7 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
@@ -32,6 +33,11 @@ public class SpeelScherm5 extends GridPane
 	private CheckBox cbrij3;
 	private CheckBox cbrij4;
 	private CheckBox cbrij5;
+	private Button btnLegOp;
+	private Button btnNeemStapel;
+	private Alert speler;
+	private Button btnscore;
+	private Button btnjoker;
 	
 	public SpeelScherm5(DomeinController dc)
 	{
@@ -86,6 +92,23 @@ public class SpeelScherm5 extends GridPane
 			
 				});
 		
+		Button btnSpeler = new Button("Speler aan zet");
+		this.add(btnSpeler, 3, 1);
+		btnSpeler.setOnAction(new EventHandler<ActionEvent>()
+				{
+
+					@Override
+					public void handle(ActionEvent arg0) 
+					{
+						speler = new Alert(Alert.AlertType.INFORMATION);
+						speler.setTitle("De speler aan zet is: ");
+						speler.setHeaderText(dc.geefEersteSpelerAanZetWeer()); //geeft de beginspeler weer
+						speler.showAndWait();
+					
+					}
+			
+				});
+		
 		
 		
 		Label lblgk = new Label("De getrokken kaart is: ");
@@ -123,6 +146,7 @@ public class SpeelScherm5 extends GridPane
 						dc.voegKaartAanStapelToe(stapelID);
 						
 						lblgetrokkenKaart.setText(dc.geefGetrokkenKaartWeer());
+						speler.setHeaderText(dc.geefSpelerAanZetWeer());
 						
 						cbrij1.setSelected(false);
 						cbrij2.setSelected(false);
@@ -150,6 +174,7 @@ public class SpeelScherm5 extends GridPane
 						
 						int stapelID = keuzeRij();
 						lblgetrokkenKaart.setText(dc.geefGetrokkenKaartWeer());
+						speler.setHeaderText(dc.geefSpelerAanZetWeer());
 						
 						cbrij1.setSelected(false);
 						cbrij2.setSelected(false);
@@ -164,11 +189,69 @@ public class SpeelScherm5 extends GridPane
 						stage.setScene(scene);
 						stage.show();
 						
+						if(dc.isEindeRonde()) //als de ronde afgelopen is krijg je een alertscherm die je vertelt dat een nieuwe ronde van start gaat 
+						{
+							Alert startRonde = new Alert(Alert.AlertType.INFORMATION);
+							startRonde.setTitle("Beste spelers");
+							startRonde.setHeaderText("Een nieuwe ronde gaat van start!");
+							startRonde.showAndWait();
+							
+							dc.zetAllesKlaarVoorBeginRonde();
+						}
+							
+						else if(dc.isEindeSpel())
+							{
+								Alert einde = new Alert(Alert.AlertType.INFORMATION);
+								einde.setHeaderText("Einde spel!");
+								einde.showAndWait();
+								
+								btnjoker.setOnAction(new EventHandler<ActionEvent>()
+										{
+
+											@Override
+											public void handle(ActionEvent event) 
+											{
+												JokerScherm js = new JokerScherm(dc);
+												Scene scene = new Scene(js, 400, 500);
+												Stage stage = (Stage)(getScene().getWindow());
+												stage.setScene(scene);
+												stage.show();
+												
+											}
+									
+										});
+								
+										btnscore.setOnAction(new EventHandler<ActionEvent>()
+										{
+
+											@Override
+											public void handle(ActionEvent event) 
+											{
+												ScoreScherm ss = new ScoreScherm(dc);
+												Scene scene = new Scene(ss, 400, 500);
+												Stage stage = (Stage)(getScene().getWindow());
+												stage.setScene(scene);
+												stage.show();
+												
+												
+											}
+									
+										
+										});
+							
+							}
+						
+						
 					}
 			
 				}
 				);
 		
+		btnscore = new Button("Scores");
+		this.add(btnscore, 6, 7);
+		
+		btnjoker = new  Button("Jokers");
+		this.add(btnjoker, 3, 7);
 		
 			
 		

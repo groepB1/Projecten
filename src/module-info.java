@@ -9,6 +9,7 @@ module Projecten {
 	requires javafx.base;
 	requires javafx.controls;
 	requires javafx.graphics;
+	
 	opens main to javafx.graphics, javafx.controls;
 	
 }
