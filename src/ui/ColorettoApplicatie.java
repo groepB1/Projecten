@@ -6,9 +6,10 @@ import domein.DomeinController;
 public class ColorettoApplicatie 
 {
 	Scanner invoer = new Scanner(System.in);
-	
+	private final DomeinController dc;
 	public ColorettoApplicatie(DomeinController dc)
 	{
+		this.dc = dc;
 		int aantalSpelers=0;
 		boolean spelOpgeslagen = false;
 		System.out.println("geef 1 in om het vorige spel te hervatten. Geef 2 om om een nieuw spel te starten.");
@@ -16,19 +17,16 @@ public class ColorettoApplicatie
 		
 		if (startNieuwSpelOfSpelHervatten ==1)
 		{
-			int ronde = 0;
 			dc.zetVorigSpelKlaar();
 			aantalSpelers = dc.geefAantalSpelers();
 			System.out.println(dc.geefOverzichtVanAlleSpelers());
-			while (/*!dc.isEindeSpel()*/ronde !=1)
+			while (!dc.isEindeSpel())
 			{
-				System.out.printf("Ronde %d%n", ronde);
 				for (int teller =0; teller<aantalSpelers; teller++)
 				{
 					startRondeAndereSpelers(dc);
 				}	
 				speelRonde2En3(dc, aantalSpelers);
-				ronde++;
 				
 				//test opslaanSpel
 				System.out.println("geef 9999 in om het spel op te slaan en te stoppen. geef iets anders in om door te gaan. ");
@@ -100,8 +98,8 @@ public class ColorettoApplicatie
 		{
 			System.out.println("Geef aantal spelers in");
 			aantalSpelers = invoer.nextInt();
-			dc.startNieuwSpel(Spelnaam, aantalSpelers);
 		} while (aantalSpelers != 4 && aantalSpelers !=5);
+		dc.startNieuwSpel(Spelnaam, aantalSpelers);
 		return aantalSpelers;
 	}
 	

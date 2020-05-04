@@ -26,7 +26,6 @@ public class Spel
 		setAantalSpelers(aantalSpelers);
 		setDeckKaarten(maakDeckAan());
 		setStapelRijen(maakStapelRijAan());
-		setAantalSpelers(aantalSpelers);
 	}
 	
 	public Spel()
@@ -51,7 +50,7 @@ public class Spel
 	}
 
 
-	public List<Kaart> maakDeckAan()
+	private List<Kaart> maakDeckAan()
 	{
 		List<Kaart> kaartenLijst	= new ArrayList <Kaart>();
 		String kleur = null;
@@ -92,7 +91,7 @@ public class Spel
 	}
 
 	
-	public  List<StapelRij> maakStapelRijAan() 
+	private  List<StapelRij> maakStapelRijAan() 
 	{
 		List<StapelRij> stapelRij	= new ArrayList <>();
 		
@@ -138,7 +137,7 @@ public class Spel
 	}
 	
 	
-	public Speler bepaalEersteSpelerAanZet()
+	private Speler bepaalEersteSpelerAanZet()
 	{
 		SecureRandom random = new SecureRandom();
 		int index = random.nextInt(spelerLijst.size());
@@ -189,7 +188,7 @@ public class Spel
 	}
 	
 	
-	public Speler bepaalSpelerAanZet()  
+	private Speler bepaalSpelerAanZet()  
 	{
 		Speler speler = null;
 		do
@@ -234,6 +233,9 @@ public class Spel
 		StapelRij stapelRij;
 		List<Kaart> temp= new ArrayList <Kaart>();
 		stapelRij = stapelRijen.get(stapelID-1);
+		
+		if (!stapelRij.isIsgenomen())
+		{
 		Speler spelerAanBod = spelerLijst.get(vorigeSpelerIndex);
 		temp = stapelRij.getKaartenPerRij();
 		
@@ -245,6 +247,11 @@ public class Spel
 		stapelRij.maakLijstLeeg();
 		spelerAanBod.setHeeftRijOpgenomen(true);
 		stapelRij.setIsgenomen(true);
+		}
+		else if (stapelRij.isIsgenomen())
+		{
+			throw new IllegalArgumentException("rij is al genomen");
+		}
 	}
 	
 	
@@ -348,6 +355,7 @@ public class Spel
 		return result;
 	}
 	
+	
 	public boolean spelOpslaan()
 	{
 		//spelopslaan
@@ -398,6 +406,8 @@ public class Spel
 		}
 		return kleur;
 	}
+	
+	
 	private int[] telKaarten(List<Kaart> kaartenLijst)
 	{
 		int  aantalPlus2 = 0, aantalOranje = 0, aantalBlauw = 0, aantalGeel = 0, aantalRood = 0, aantalGroen = 0, aantalGrijs = 0, aantalRoos = 0, aantalJoker=0;

@@ -25,10 +25,11 @@ public class spelMapper
 			 
 			 PreparedStatement queryGeefSpelIndex = conn.prepareStatement("SELECT * FROM coloretto_2.spel WHERE spelNaam = ? ORDER BY idSpel DESC;");
 			 queryGeefSpelIndex.setString(1, spel.getNaam());
-			 try (ResultSet rsSpelers = queryGeefSpelIndex.executeQuery()){
+			 try (ResultSet rsSpelers = queryGeefSpelIndex.executeQuery())
+			 {
 				 rsSpelers.next();
 				 int id = rsSpelers.getInt("idspel");
-				return id;	
+				 return id;	
 			 }
 		 }catch (SQLException ex) {
 	            for (Throwable t : ex) 
@@ -163,11 +164,11 @@ public class spelMapper
 				rs.next();
 				do
 				{
-				id = rs.getInt("idSpel");
-				String naam = rs.getString("naam");
-				Speler speler = new Speler(naam);
-				spelers.add(speler);
-				rs.next();
+					id = rs.getInt("idSpel");
+					String naam = rs.getString("naam");
+					Speler speler = new Speler(naam);
+					spelers.add(speler);
+					rs.next();
 				}while (id==rs.getInt("idSpel"));
 				
 			}
@@ -194,14 +195,14 @@ public class spelMapper
 				rs.next();
 				do
 				{
-				id = rs.getInt("idSpel");
-				String kleur = rs.getString("kleur");
-				int aantal = rs.getInt("aantal");
-				for (int teller = 0; teller <=aantal-1; teller++)
-				{
-					Kaart kaart = new Kaart(kleur);
-					kaarten.add(kaart);
-				}
+					id = rs.getInt("idSpel");
+					String kleur = rs.getString("kleur");
+					int aantal = rs.getInt("aantal");
+					for (int teller = 0; teller <=aantal-1; teller++)
+					{
+						Kaart kaart = new Kaart(kleur);
+						kaarten.add(kaart);
+					}
 				rs.next();
 				}while (id==rs.getInt("idSpel"));
 				
@@ -230,10 +231,10 @@ public class spelMapper
 				rs.next();
 				do
 				{
-				id = rs.getInt("idSpel");
-				String kleur = rs.getString("kleur");
-				int aantal = rs.getInt("aantal");
-				for (int teller = 0; teller <=aantal-1; teller++)
+					id = rs.getInt("idSpel");
+					String kleur = rs.getString("kleur");
+					int aantal = rs.getInt("aantal");
+					for (int teller = 0; teller <=aantal-1; teller++)
 				{
 					Kaart kaart = new Kaart(kleur);
 					spelerKaarten.add(kaart);
@@ -252,10 +253,4 @@ public class spelMapper
 	}
 		return spelerKaarten;
 	}
-	
-// verwijder spel zie vb
-	
-	
-	
-	
 }

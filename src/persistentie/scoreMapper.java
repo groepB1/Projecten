@@ -36,15 +36,16 @@ public class scoreMapper
 		try (Connection conn = DriverManager.getConnection(MapperConfig.JDBC_URL))
 		 {
 			PreparedStatement querygeefScorebordWeer = conn.prepareStatement("SELECT * FROM highscores order by score;");
-			try (ResultSet rsScoreBord = querygeefScorebordWeer.executeQuery()){
-			while (rsScoreBord.next())
+			try (ResultSet rsScoreBord = querygeefScorebordWeer.executeQuery())
 			{
-				String naam = rsScoreBord.getString("spelernaam");
-				int score = rsScoreBord.getInt("score");
-				Speler speler = new Speler(naam);
-				speler.setScore(score);
-				spelerHighScorelijst.add(speler);
-			}
+				while (rsScoreBord.next())
+				{
+					String naam = rsScoreBord.getString("spelernaam");
+					int score = rsScoreBord.getInt("score");
+					Speler speler = new Speler(naam);
+					speler.setScore(score);
+					spelerHighScorelijst.add(speler);
+				}
 			}
 		 }catch (SQLException ex) {
 	            for (Throwable t : ex) 

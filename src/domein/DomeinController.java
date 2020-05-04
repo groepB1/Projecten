@@ -3,7 +3,7 @@ package domein;
 public class DomeinController 
 {
 	Spel spel;
-	
+
 	public void startNieuwSpel(String naam,int aantalSpelers)
 	{
 		spel = new Spel(naam, aantalSpelers);
@@ -99,19 +99,25 @@ public class DomeinController
 		spel.veranderKleur(kleurGetal, index);
 	}
 	
+	
 	public String geefOverzichtHighscores()
 	{
 		return spel.geefOverzichtHighscores();
 	}
 	
+	
 	public boolean opslaanSpel()
 	{
 		return spel.spelOpslaan();
 	}
+	
+	
 	public void zetVorigSpelKlaar()
 	{
 		spel = new Spel();
 	}
+	
+	
 	public int geefAantalSpelers()
 	{
 		return spel.getAantalSpelers();
