@@ -134,7 +134,7 @@ import javafx.stage.Stage;
 					dc.geefSpelerNaamIn(txfSpeler5.getText());
 					
 					SpeelScherm5 spel = new SpeelScherm5(dc);
-					Scene scene = new Scene(spel, 1200, 500);
+					Scene scene = new Scene(spel, 1200, 600);
 					Stage stage = (Stage)(getScene().getWindow());
 					stage.setScene(scene);
 					stage.show();
@@ -144,5 +144,6 @@ import javafx.stage.Stage;
 		}
 
 	}
+
 
 

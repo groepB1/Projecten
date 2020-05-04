@@ -38,6 +38,7 @@ public class SpeelScherm5 extends GridPane
 	private Alert speler;
 	private Button btnscore;
 	private Button btnjoker;
+	private Button btnOpslaan;
 	
 	public SpeelScherm5(DomeinController dc)
 	{
@@ -64,50 +65,10 @@ public class SpeelScherm5 extends GridPane
 		lblTitel.setFont(Font.font("verdana", FontWeight.BOLD, 30));
 		this.add(lblTitel, 2, 1);
 		
-		exit.setOnAction(new EventHandler<ActionEvent>()
-		{
-
-			@Override
-			public void handle(ActionEvent arg0) 
-			{
-				Platform.exit();
-				
-			}
-		
-		});
-
-		
-		overzicht.setOnAction(new EventHandler<ActionEvent>()
-				{
-					@Override
-					public void handle(ActionEvent event) 
-					{
-						OverzichtScherm os = new OverzichtScherm(dc); // oproepen overzichtscherm
-						Scene scene = new Scene(os, 400, 300);
-						Stage stage = new Stage();
-						stage.setScene(scene);
-						stage.show();
-						
-					}
-			
-				});
 		
 		Button btnSpeler = new Button("Speler aan zet");
 		this.add(btnSpeler, 3, 1);
-		btnSpeler.setOnAction(new EventHandler<ActionEvent>()
-				{
-
-					@Override
-					public void handle(ActionEvent arg0) 
-					{
-						speler = new Alert(Alert.AlertType.INFORMATION);
-						speler.setTitle("De speler aan zet is: ");
-						speler.setHeaderText(dc.geefEersteSpelerAanZetWeer()); //geeft de beginspeler weer
-						speler.showAndWait();
-					
-					}
-			
-				});
+		
 		
 		
 		
@@ -135,117 +96,13 @@ public class SpeelScherm5 extends GridPane
 		
 		Button btnLegOp = new Button("Leg op een stapel");
 		this.add(btnLegOp, 3, 5);
-		btnLegOp.setOnAction(new EventHandler<ActionEvent>()
-				{
-
-					@Override
-					public void handle(ActionEvent event) 
-					{
-						int stapelID = keuzeRij();
-						
-						dc.voegKaartAanStapelToe(stapelID);
-						
-						lblgetrokkenKaart.setText(dc.geefGetrokkenKaartWeer());
-						speler.setHeaderText(dc.geefSpelerAanZetWeer());
-						
-						cbrij1.setSelected(false);
-						cbrij2.setSelected(false);
-						cbrij3.setSelected(false);
-						cbrij4.setSelected(false);
-						cbrij5.setSelected(false);
-						
-						StapelScherm5 sts = new StapelScherm5(dc);
-						Scene scene = new Scene(sts, 400, 300);
-						Stage stage = new Stage();
-						stage.setScene(scene);
-						stage.show();
-					}
-			
-				});
+		
 		
 		Button btnNeemStapel = new Button("Kies een stapel en neem ze");
 		this.add(btnNeemStapel, 7, 5);
-		btnNeemStapel.setOnAction(new EventHandler<ActionEvent>() 
-				{
-
-					@Override
-					public void handle(ActionEvent event) 
-					{
-						
-						int stapelID = keuzeRij();
-						lblgetrokkenKaart.setText(dc.geefGetrokkenKaartWeer());
-						speler.setHeaderText(dc.geefSpelerAanZetWeer());
-						
-						cbrij1.setSelected(false);
-						cbrij2.setSelected(false);
-						cbrij3.setSelected(false);
-						cbrij4.setSelected(false);
-						cbrij5.setSelected(false);
-						
-						dc.neemStapelRij(stapelID);
-						StapelScherm sts = new StapelScherm(dc);
-						Scene scene = new Scene(sts, 400, 300);
-						Stage stage = new Stage();
-						stage.setScene(scene);
-						stage.show();
-						
-						if(dc.isEindeRonde()) //als de ronde afgelopen is krijg je een alertscherm die je vertelt dat een nieuwe ronde van start gaat 
-						{
-							Alert startRonde = new Alert(Alert.AlertType.INFORMATION);
-							startRonde.setTitle("Beste spelers");
-							startRonde.setHeaderText("Een nieuwe ronde gaat van start!");
-							startRonde.showAndWait();
+		
 							
-							dc.zetAllesKlaarVoorBeginRonde();
-						}
-							
-						else if(dc.isEindeSpel())
-							{
-								Alert einde = new Alert(Alert.AlertType.INFORMATION);
-								einde.setHeaderText("Einde spel!");
-								einde.showAndWait();
-								
-								btnjoker.setOnAction(new EventHandler<ActionEvent>()
-										{
-
-											@Override
-											public void handle(ActionEvent event) 
-											{
-												JokerScherm js = new JokerScherm(dc);
-												Scene scene = new Scene(js, 400, 500);
-												Stage stage = (Stage)(getScene().getWindow());
-												stage.setScene(scene);
-												stage.show();
-												
-											}
-									
-										});
-								
-										btnscore.setOnAction(new EventHandler<ActionEvent>()
-										{
-
-											@Override
-											public void handle(ActionEvent event) 
-											{
-												ScoreScherm ss = new ScoreScherm(dc);
-												Scene scene = new Scene(ss, 400, 500);
-												Stage stage = (Stage)(getScene().getWindow());
-												stage.setScene(scene);
-												stage.show();
-												
-												
-											}
-									
-										
-										});
-							
-							}
-						
-						
-					}
-			
-				}
-				);
+				
 		
 		btnscore = new Button("Scores");
 		this.add(btnscore, 6, 7);
@@ -253,13 +110,174 @@ public class SpeelScherm5 extends GridPane
 		btnjoker = new  Button("Jokers");
 		this.add(btnjoker, 3, 7);
 		
-			
+		//button om spel op te slaan
+		btnOpslaan = new Button("Opslaan");
+		this.add(btnOpslaan, 1, 8);
 		
-			
-			
+		//actionEvents
+		exit.setOnAction(new EventHandler<ActionEvent>()
+		{
+
+			@Override
+			public void handle(ActionEvent arg0) 
+			{
+				Platform.exit();
+				
+			}
 		
+		});
+
 		
+		overzicht.setOnAction(new EventHandler<ActionEvent>()
+				{
+					@Override
+					public void handle(ActionEvent event) 
+					{
+						OverzichtScherm os = new OverzichtScherm(dc); // oproepen overzichtscherm
+						Scene scene = new Scene(os, 400, 300);
+						Stage stage = new Stage();
+						stage.setScene(scene);
+						stage.show();
+						
+					}
+			
+				});
+		btnSpeler.setOnAction(new EventHandler<ActionEvent>()
+		{
+
+			@Override
+			public void handle(ActionEvent arg0) 
+			{
+				speler = new Alert(Alert.AlertType.INFORMATION);
+				speler.setTitle("De speler aan zet is: ");
+				speler.setHeaderText(dc.geefEersteSpelerAanZetWeer()); //geeft de beginspeler weer
+				speler.showAndWait();
+			
+			}
+	
+		});
+		
+		btnLegOp.setOnAction(new EventHandler<ActionEvent>()
+		{
+
+			@Override
+			public void handle(ActionEvent event) 
+			{
+				int stapelID = keuzeRij();
+				
+				dc.voegKaartAanStapelToe(stapelID);
+				
+				
+				cbrij1.setSelected(false);
+				cbrij2.setSelected(false);
+				cbrij3.setSelected(false);
+				cbrij4.setSelected(false);
+				cbrij5.setSelected(false);
+				
+				StapelScherm5 sts = new StapelScherm5(dc);
+				Scene scene = new Scene(sts, 400, 300);
+				Stage stage = new Stage();
+				stage.setScene(scene);
+				stage.show();
+				
+				lblgetrokkenKaart.setText(dc.geefGetrokkenKaartWeer());
+				speler.setHeaderText(dc.geefSpelerAanZetWeer());
+			}
+	
+		});
+		
+		btnNeemStapel.setOnAction(new EventHandler<ActionEvent>() 
+		{
+
+			@Override
+			public void handle(ActionEvent event) 
+			{
+				int stapelID = keuzeRij();
+				
+				
+				cbrij1.setSelected(false);
+				cbrij2.setSelected(false);
+				cbrij3.setSelected(false);
+				cbrij4.setSelected(false);
+				cbrij5.setSelected(false);
+				
+				dc.neemStapelRij(stapelID);
+				StapelScherm sts = new StapelScherm(dc);
+				Scene scene = new Scene(sts, 400, 300);
+				Stage stage = new Stage();
+				stage.setScene(scene);
+				stage.show();
+				
+				lblgetrokkenKaart.setText(dc.geefGetrokkenKaartWeer());
+				speler.setHeaderText(dc.geefSpelerAanZetWeer());
+				
+				if(dc.isEindeRonde()) //als de ronde afgelopen is krijg je een alertscherm die je vertelt dat een nieuwe ronde van start gaat 
+				{
+					Alert startRonde = new Alert(Alert.AlertType.INFORMATION);
+					startRonde.setTitle("Beste spelers");
+					startRonde.setHeaderText("Een nieuwe ronde gaat van start!");
+					startRonde.showAndWait();
+					
+					dc.zetAllesKlaarVoorBeginRonde();
+				}
+					
+				else if(dc.isEindeSpel())
+					{
+						Alert einde = new Alert(Alert.AlertType.INFORMATION);
+						einde.setHeaderText("Einde spel! Ga eerst de jokers bekijken en bekijk nadien jullie scores!");
+						einde.showAndWait();
+						
+						btnjoker.setOnAction(new EventHandler<ActionEvent>()
+								{
+
+									@Override
+									public void handle(ActionEvent event) 
+									{
+										JokerScherm js = new JokerScherm(dc);
+										Scene scene = new Scene(js, 400, 500);
+										Stage stage = (Stage)(getScene().getWindow());
+										stage.setScene(scene);
+										stage.show();
+										
+									}
+					
+							});
+						
+								btnscore.setOnAction(new EventHandler<ActionEvent>()
+								{
+
+									@Override
+									public void handle(ActionEvent event) 
+									{
+										ScoreScherm ss = new ScoreScherm(dc);
+										Scene scene = new Scene(ss, 400, 500);
+										Stage stage = (Stage)(getScene().getWindow());
+										stage.setScene(scene);
+										stage.show();
+										
+										
+									}
+							
+								
+								});
+						}
+					}	
+			
+				});
+		
+		btnOpslaan.setOnAction(new EventHandler<ActionEvent>()
+		{
+
+			@Override
+			public void handle(ActionEvent event) 
+			{
+				dc.opslaanSpel();
+				
+			}
+	
+		});
 	}
+	
 	public int keuzeRij()
 	{
 		int stapelID=0;
@@ -290,3 +308,4 @@ public class SpeelScherm5 extends GridPane
 	}
 
 }
+

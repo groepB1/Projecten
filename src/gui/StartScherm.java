@@ -12,13 +12,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
-import javafx.scene.control.TextArea;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -105,6 +101,23 @@ public class StartScherm  extends GridPane
 			
 				});
 		
+		btnHuidigSpel.setOnAction(new EventHandler<ActionEvent>()
+				{
+
+					@Override
+					public void handle(ActionEvent arg0) 
+					{
+						dc.zetVorigSpelKlaar();
+						
+						SpeelScherm spel = new SpeelScherm(dc);
+						Scene scene = new Scene(spel, 1200, 600);
+						Stage stage = (Stage)(getScene().getWindow());
+						stage.setScene(scene);
+						stage.show();
+						
+					}
+			
+				});
 	}
 	
 
@@ -113,3 +126,4 @@ public class StartScherm  extends GridPane
 	
 
 }
+

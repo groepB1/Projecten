@@ -17,7 +17,7 @@ public class StartUp2 extends Application
 		DomeinController dc = new DomeinController();
 		
 		StartScherm root = new StartScherm(dc);
-	
+		
 		Scene scene = new Scene(root, 400, 300);
 		primaryStage.setTitle("Coloretto");
 		primaryStage.setScene(scene);

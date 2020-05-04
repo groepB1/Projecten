@@ -1,4 +1,5 @@
-module Projecten {
+module Projecten 
+{
 	exports persistentie;
 	exports ui;
 	exports gui;
@@ -9,7 +10,10 @@ module Projecten {
 	requires javafx.base;
 	requires javafx.controls;
 	requires javafx.graphics;
+	requires javafx.fxml;
 	
+	
+	opens gui to javafx.graphics, javafx.controls;
 	opens main to javafx.graphics, javafx.controls;
 	
 }

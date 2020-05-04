@@ -9,6 +9,8 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 
 public class ScoreScherm extends VBox 
 {
@@ -25,12 +27,19 @@ public class ScoreScherm extends VBox
 		this.setPadding(new Insets(10, 10, 10, 10));
 		this.setBackground(new Background(new BackgroundFill(Color.LIGHTBLUE, null, null)));
 		
-		Label lblTitel = new Label("SCORES");
+		Label lblTitel = new Label("SCOREBORD");
+		lblTitel.setFont(Font.font("Tahoma", FontWeight.BOLD, 20));
+		
+		Label lblOverzicht = new Label("Het eindoverzicht van alle spelers.");
 		
 		eindOverzicht = new TextArea(dc.geefEindOverzicht());
 		
+		Label lblScore = new Label("De scores van alle spelers.");
 		
-		this.getChildren().addAll(lblTitel,eindOverzicht);
+		TextArea txaScore = new TextArea(dc.geefOverzichtHighscores());
+		
+		this.getChildren().addAll(lblTitel,lblOverzicht, eindOverzicht,lblScore, txaScore);
 	}
 
 }
+

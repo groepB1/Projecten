@@ -137,7 +137,7 @@ public class VierSpelerScherm extends GridPane
 			{	
 				SpeelScherm spel = new SpeelScherm(dc);
 				
-				Scene scene = new Scene(spel, 1200, 500);
+				Scene scene = new Scene(spel, 1200, 600);
 				Stage stage = (Stage)(getScene().getWindow());
 				stage.setScene(scene);
 				stage.show();
@@ -156,3 +156,4 @@ public class VierSpelerScherm extends GridPane
 	
 
 }
+

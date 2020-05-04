@@ -21,7 +21,7 @@ public class JokerScherm extends VBox
 	private DomeinController dc;
 	private Label lblTitel;
 	private Label lblKleur;
-	private ComboBox cbKleur;
+	private ComboBox<String> cbKleur;
 	private int kleurGetal;
 	private Button btnOk;
 	private Button btnTerug;
@@ -52,33 +52,34 @@ public class JokerScherm extends VBox
 																															Geef 6 in voor groen. Geef 7 in voor roos.");
 																															int kleurGetal = invoer.nextInt();
 																															dc.veranderKleur(kleurGetal, teller);
-																														}
+																												}
 																													}
 																													
 																													}
 																												}*/
 		
 		//titel van het scherm
-		lblTitel = new Label("SPELERS MET EEN JOKER");	
+		lblTitel = new Label("SPELERS MET EEN JOKER");
+		txaSpelerMetJoker = new TextArea();
+		lblKleur = new Label("Kies de kleur van je joker");
+		//combobox waaruit je de kleur kan kiezen die je wil
+		cbKleur = new ComboBox<String>();
+		cbKleur.getItems().addAll("blauw","geel","grijs","oranje", "groen", "rood", "roos");
+		btnOk = new Button("OK");
+			
 		
-		for(teller = 0; teller <= 3; teller++ )
+		for(teller = 0; teller <= dc.geefAantalSpelers()-1; teller++ )
 		{
 		
 		//tekstvak met spelers die een joker bezitten
-			txaSpelerMetJoker = new TextArea();
 			txaSpelerMetJoker.setText(dc.geefSpelerMetJokerWeer(teller));
 			
 		for(teller2 = 0; teller2<dc.geefAantalJokers(teller); teller2++)
 		{
-			//label kies een kleur
-			lblKleur = new Label("Kies de kleur van je joker");
 			
-			//combobox waaruit je de kleur kan kiezen die je wil
-			cbKleur = new ComboBox();
-			cbKleur.getItems().addAll("blauw","geel","grijs","oranje", "groen", "rood", "roos");
-			
+		
+		
 			//button om je kleur te bevestigen
-		btnOk = new Button("OK");
 		btnOk.setOnAction(new EventHandler<ActionEvent>()
 				{
 
@@ -96,10 +97,11 @@ public class JokerScherm extends VBox
 					}
 			
 				});
-		
-					
 			}
 		}
+					
+			
+		
 		
 		btnTerug = new Button("Terug");
 		btnTerug.setOnAction(new EventHandler<ActionEvent>()
@@ -108,18 +110,30 @@ public class JokerScherm extends VBox
 					@Override
 					public void handle(ActionEvent event) 
 					{
+						if(dc.geefAantalSpelers()==4)
+						{
 						SpeelScherm spel = new SpeelScherm(dc);
 						
-						Scene scene = new Scene(spel, 1200, 500);
+						Scene scene = new Scene(spel, 1200, 600);
 						Stage stage = (Stage)(getScene().getWindow());
 						stage.setScene(scene);
 						stage.show();
+						}
+						else if(dc.geefAantalSpelers()==5)
+						{
+							SpeelScherm5 spel = new SpeelScherm5(dc);
+							
+							Scene scene = new Scene(spel, 1200, 600);
+							Stage stage = (Stage)(getScene().getWindow());
+							stage.setScene(scene);
+							stage.show();	
+						}
+						
 						
 						
 					}
 			
 				});
-		
 		
 		this.getChildren().addAll(lblTitel, txaSpelerMetJoker,lblKleur, cbKleur, btnOk, btnTerug);
 		
@@ -162,3 +176,4 @@ public class JokerScherm extends VBox
 	
 
 }
+

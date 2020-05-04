@@ -47,6 +47,7 @@ public class SpeelScherm extends GridPane
 	private Alert speler;
 	private Button btnscore;
 	private Button btnjoker;
+	private Button btnOpslaan;
 	
 	public SpeelScherm(DomeinController dc)
 	{
@@ -59,7 +60,7 @@ public class SpeelScherm extends GridPane
 		//layout van scherm
 		this.setVgap(20);
 		this.setHgap(20);
-		this.setBackground(new Background(new BackgroundFill(Color.LIGHTGOLDENRODYELLOW, null, null))); //layout van de scene
+		this.setBackground(new Background(new BackgroundFill(Color.LIGHTSEAGREEN, null, null))); //layout van de scene
 		
 		//menu 
 		MenuBar menu = new MenuBar(); //menu om het speler overzicht op te vragen
@@ -74,7 +75,11 @@ public class SpeelScherm extends GridPane
 		Label lblTitel = new Label("COLLORETTO"); // een titel van het spel
 		lblTitel.setFont(Font.font("verdana", FontWeight.BOLD,30));
 		this.add(lblTitel, 1, 1);
-		
+		//afbeelding Coloretto
+		ImageView coloretto = new ImageView(new Image(getClass().getResourceAsStream("/images/Coloretto.png")));
+		coloretto.setFitHeight(100);
+		coloretto.setFitWidth(70);
+		this.add(coloretto, 1, 2);
 		//button om de speler aan zet te zien
 		Button btnSpeler = new Button("Speler aan zet");
 		this.add(btnSpeler, 3, 1);
@@ -120,7 +125,9 @@ public class SpeelScherm extends GridPane
 		btnNeemStapel = new Button("Kies een stapel en neem ze");
 		this.add(btnNeemStapel, 6, 5);
 		
-					
+		//button om spel op te slaan
+		btnOpslaan = new Button("Opslaan");
+		this.add(btnOpslaan, 1, 8);
 				
 		//action events voor buttons: speler, exit, overzicht, leg op, neem stapel, jokerscherm, scorescherm
 		btnSpeler.setOnAction(new EventHandler<ActionEvent>()
@@ -223,16 +230,18 @@ public class SpeelScherm extends GridPane
 				
 					if(dc.isEindeRonde())
 					{
+						
 					Alert startRonde = new Alert(Alert.AlertType.INFORMATION);
 					startRonde.setTitle("Beste spelers");
 					startRonde.setHeaderText("Een nieuwe ronde gaat van start!");
 					startRonde.showAndWait();
 					
+					
 					dc.zetAllesKlaarVoorBeginRonde();
-					}
+					
 				
-					else if(dc.isEindeSpel())
-					{
+						if(dc.isEindeSpel())
+						{
 				
 				
 						Alert einde = new Alert(Alert.AlertType.INFORMATION);
@@ -273,12 +282,22 @@ public class SpeelScherm extends GridPane
 								
 								});
 					
+						}
 					}
-				
 				}
 			});
 		
-		
+			btnOpslaan.setOnAction(new EventHandler<ActionEvent>()
+					{
+
+						@Override
+						public void handle(ActionEvent event) 
+						{
+							dc.opslaanSpel();
+							
+						}
+				
+					});
 		
 		
 					
@@ -376,3 +395,4 @@ public class SpeelScherm extends GridPane
 
 	
 }
+
