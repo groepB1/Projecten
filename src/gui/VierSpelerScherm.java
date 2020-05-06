@@ -1,6 +1,6 @@
 package gui;
 
-import java.awt.TextArea;
+
 
 import domein.DomeinController;
 import javafx.application.Platform;
@@ -137,7 +137,7 @@ public class VierSpelerScherm extends GridPane
 			{	
 				SpeelScherm spel = new SpeelScherm(dc);
 				
-				Scene scene = new Scene(spel, 1200, 600);
+				Scene scene = new Scene(spel, 1400, 600);
 				Stage stage = (Stage)(getScene().getWindow());
 				stage.setScene(scene);
 				stage.show();

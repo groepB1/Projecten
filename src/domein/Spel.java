@@ -155,7 +155,7 @@ public class Spel
 	public String geefGetrokkenKaartWeer()
 	{
 		getrokkenKaart = trekKaart();
-		return String.format("De getrokken kaart is: %s%n", getrokkenKaart.toString());		
+		return String.format("%s", getrokkenKaart.toString());		
 	}
 	
 	
@@ -278,7 +278,7 @@ public class Spel
 	
 	public boolean isEindeSpel()
 	{
-		return deckKaarten.size()==0;
+		return deckKaarten.size()>=60;
 	}
 		
 	

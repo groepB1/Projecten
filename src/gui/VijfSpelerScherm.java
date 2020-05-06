@@ -133,8 +133,8 @@ import javafx.stage.Stage;
 					dc.geefSpelerNaamIn(txfSpeler4.getText());
 					dc.geefSpelerNaamIn(txfSpeler5.getText());
 					
-					SpeelScherm5 spel = new SpeelScherm5(dc);
-					Scene scene = new Scene(spel, 1200, 600);
+					SpeelScherm spel = new SpeelScherm(dc);
+					Scene scene = new Scene(spel, 1400, 600);
 					Stage stage = (Stage)(getScene().getWindow());
 					stage.setScene(scene);
 					stage.show();
