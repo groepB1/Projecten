@@ -94,14 +94,14 @@ public class ConfiguratieScherm extends GridPane
 				}
 			else
 			{
-				if(spelersComboBox.getValue().equals("4 spelers")) //indien de combobox de waarde 4 krijgt gaat men naar het vierspeler scherm
+				if(spelersComboBox.getValue().equals("4 spelers")) 
 				{
 					aantalSpelers = 4;
 					
 					dc.startNieuwSpel(txfnaam.getText(), aantalSpelers);
 					
-					VierSpelerScherm vierss = new VierSpelerScherm(dc);
-					Scene scene = new Scene(vierss, 700, 300);
+					SpelerScherm sps = new SpelerScherm(dc);
+					Scene scene = new Scene(sps, 700, 300);
 					Stage stage = (Stage)(getScene().getWindow());
 					stage.setScene(scene);
 					stage.show();
@@ -109,16 +109,18 @@ public class ConfiguratieScherm extends GridPane
 					
 					
 				}
-				else if(spelersComboBox.getValue().equals("5 spelers")) //indien de combobox de waarde 5 krijgt gaat men naar het vijfspeler scherm
+				else if(spelersComboBox.getValue().equals("5 spelers")) 
 				{			
 					aantalSpelers = 5;
 					
-					VijfSpelerScherm vijfss = new VijfSpelerScherm(dc);
-					Scene scene = new Scene(vijfss, 700, 400);
+					dc.startNieuwSpel(txfnaam.getText(), aantalSpelers);
+					
+					SpelerScherm sps = new SpelerScherm(dc);
+					Scene scene = new Scene(sps, 700, 400);
 					Stage stage = (Stage)(getScene().getWindow());
 					stage.setScene(scene);
 					stage.show();
-					dc.startNieuwSpel(txfnaam.getText(), aantalSpelers);
+					
 				}
 					
 			}

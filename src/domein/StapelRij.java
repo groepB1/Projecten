@@ -63,8 +63,13 @@ public class StapelRij
 	{
 		this.kaartenPerRij = kaartenPerRij;
 	}
-	public void setIsgenomen(boolean isgenomen) {
+	public void setIsgenomen(boolean isgenomen) 
+	{
 		this.isgenomen = isgenomen;
+	}
+	public boolean getIsgenomen()
+	{
+		return isgenomen;
 	}
 
 	 

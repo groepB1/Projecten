@@ -278,7 +278,7 @@ public class Spel
 	
 	public boolean isEindeSpel()
 	{
-		return deckKaarten.size()>=60;
+		return deckKaarten.size() ==   0;
 	}
 		
 	
@@ -431,6 +431,15 @@ public class Spel
 		}
 		int [] array = {aantalOranje, aantalBlauw, aantalRood,aantalGeel, aantalGrijs,aantalGroen, aantalRoos,aantalPlus2, aantalJoker};
 		return array;
+		
+	}
+	public boolean stapelIsGenomen(int stapelID)
+	{
+		StapelRij stapelRij;
+		
+		stapelRij = stapelRijen.get(stapelID-1);
+		
+		return stapelRij.getIsgenomen();
 		
 	}
 		

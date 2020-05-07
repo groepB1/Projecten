@@ -39,6 +39,7 @@ public class StapelScherm extends VBox
 		{
 			dc.zetAllesKlaarVoorBeginRonde();
 			overzichtStapels.setText(dc.geefOverzichtVanStapelRij());
+			
 		}
 		
 		Button btnTerug = new Button("terug");

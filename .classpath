@@ -6,11 +6,6 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/Users/jordidewit/Documents/mysql-connector-java-8.0.15.jar">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
 	<classpathentry kind="lib" path="/Users/jordidewit/Documents/Hogent 2019-2020/Semester II/OO Programmeren II/javafx-sdk-11.0.2/lib/javafx.base.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
@@ -27,6 +22,11 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="/Users/jordidewit/Documents/Hogent 2019-2020/Semester II/OO Programmeren II/javafx-sdk-11.0.2/lib/javafx.graphics.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="/Users/jordidewit/Documents/Hogent 2019-2020/Semester II/OO Programmeren II/mysql-connector-java-8.0.15.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>

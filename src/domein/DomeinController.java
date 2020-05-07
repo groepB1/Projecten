@@ -122,4 +122,8 @@ public class DomeinController
 	{
 		return spel.getAantalSpelers();
 	}
+	public boolean stapelIsGenomen(int stapelID)
+	{
+		return spel.stapelIsGenomen(stapelID);
+	}
 }

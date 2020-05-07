@@ -9,6 +9,7 @@ import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
@@ -23,13 +24,13 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
-public class VierSpelerScherm extends GridPane
+public class SpelerScherm extends GridPane
 {
 	private DomeinController dc;
 	private ConfiguratieScherm cs;
 
 	
-	public VierSpelerScherm(DomeinController dc)
+	public SpelerScherm(DomeinController dc)
 	{
 		this.dc = dc;
 		buildGui();
@@ -53,6 +54,19 @@ public class VierSpelerScherm extends GridPane
 		this.setAlignment(Pos.TOP_LEFT);
 		this.add(menu, 0, 0);
 		
+		Label s5 = new Label("Speler5");
+		this.add(s5, 1, 8);
+		s5.setVisible(false);
+		TextField txfSpeler5 = new TextField();
+		txfSpeler5.setPromptText("naam");
+		this.add(txfSpeler5, 2, 8);
+		txfSpeler5.setVisible(false);;
+		
+		if(vijfspelers())
+		{
+			s5.setVisible(true);
+			txfSpeler5.setVisible(true);
+		}
 		
 	
 		Label lblTitel = new Label("GEEF DE NAMEN IN VAN ALLE SPELERS."); //titel van het scherm
@@ -93,6 +107,10 @@ public class VierSpelerScherm extends GridPane
 		txfSpeler4.setPromptText("naam");
 		this.add(txfSpeler4, 2, 7);
 		
+	
+		
+	
+		
 		//button om spel te starten
 		Button btnStartSpel = new Button("START SPELEN");
 		this.add(btnStartSpel, 3, 9);
@@ -107,11 +125,14 @@ public class VierSpelerScherm extends GridPane
 			@Override
 			public void handle(ActionEvent event) 
 			{
+				
+				
 				ConfiguratieScherm cs = new ConfiguratieScherm(dc);
 				Scene scene = new Scene(cs, 500, 200);
 				Stage stage = (Stage)(getScene().getWindow());
 				stage.setScene(scene);
 				stage.show();
+				
 				
 			}
 			
@@ -120,21 +141,76 @@ public class VierSpelerScherm extends GridPane
 		exit.setOnAction(new EventHandler<ActionEvent>()
 		{
 
-		@Override
-		public void handle(ActionEvent event) 
-		{
-			Platform.exit();
-			
-		}
+			@Override
+			public void handle(ActionEvent event) 
+			{
+				Platform.exit();
+				
+			}
 
 		}
 		);
+		
 		btnStartSpel.setOnAction(new EventHandler<ActionEvent>()
 		{
 
 			@Override
 			public void handle(ActionEvent btnStartSpel) 
 			{	
+			
+			if(txfSpeler1.getText().isEmpty())
+			{
+				Alert alert = new Alert(Alert.AlertType.WARNING);
+				alert.setHeaderText("Geef elke speler een naam.");
+				alert.showAndWait();
+			}
+			else if(txfSpeler2.getText().isEmpty())
+			{
+				Alert alert = new Alert(Alert.AlertType.WARNING);
+				alert.setHeaderText("Geef elke speler een naam.");
+				alert.showAndWait();
+			}
+			else if(txfSpeler3.getText().isEmpty())
+			{
+				Alert alert = new Alert(Alert.AlertType.WARNING);
+				alert.setHeaderText("Geef elke speler een naam.");
+				alert.showAndWait();
+			}
+			else if(txfSpeler4.getText().isEmpty())
+			{
+				Alert alert = new Alert(Alert.AlertType.WARNING);
+				alert.setHeaderText("Geef elke speler een naam.");
+				alert.showAndWait();
+			}
+			else if(vijfspelers())
+				{
+					if(txfSpeler5.getText().isEmpty())
+					{
+						Alert alert = new Alert(Alert.AlertType.WARNING);
+						alert.setHeaderText("Geef elke speler een naam.");
+						alert.showAndWait();
+					}
+					else {
+						SpeelScherm spel = new SpeelScherm(dc);
+						
+						Scene scene = new Scene(spel, 1400, 600);
+						Stage stage = (Stage)(getScene().getWindow());
+						stage.setScene(scene);
+						stage.show();
+						
+						dc.geefSpelerNaamIn(txfSpeler1.getText());
+						dc.geefSpelerNaamIn(txfSpeler2.getText());
+						dc.geefSpelerNaamIn(txfSpeler3.getText());
+						dc.geefSpelerNaamIn(txfSpeler4.getText());
+						dc.geefSpelerNaamIn(txfSpeler5.getText());
+					}
+						
+				}
+			else
+			{
+			
+			
+			
 				SpeelScherm spel = new SpeelScherm(dc);
 				
 				Scene scene = new Scene(spel, 1400, 600);
@@ -147,10 +223,21 @@ public class VierSpelerScherm extends GridPane
 				dc.geefSpelerNaamIn(txfSpeler3.getText());
 				dc.geefSpelerNaamIn(txfSpeler4.getText());
 				
-				
+			
+			}
 			}
 			
 		});
+	}
+	
+	public boolean vijfspelers()
+	{
+		boolean vijfdespeler = false;
+		
+		if(dc.geefAantalSpelers()==5)
+			vijfdespeler = true;
+		
+		return vijfdespeler;
 	}
 
 	
