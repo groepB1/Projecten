@@ -133,7 +133,7 @@ public class Spel
 	
 	public String geefOverzichtSpeler(Speler speler)
 	{
-		return String.format("speleroverzicht: %n%s", speler.toString());
+		return String.format("Speleroverzicht: %n%s", speler.toString());
 	}
 	
 	
@@ -250,7 +250,7 @@ public class Spel
 		}
 		else if (stapelRij.isIsgenomen())
 		{
-			throw new IllegalArgumentException("rij is al genomen");
+			throw new IllegalArgumentException("Rij is al genomen.");
 		}
 	}
 	
@@ -441,6 +441,14 @@ public class Spel
 		
 		return stapelRij.getIsgenomen();
 		
+	}
+	public boolean rijIsVol(int stapelID)
+	{
+		StapelRij stapelRij;
+		
+		stapelRij = stapelRijen.get(stapelID-1);
+		
+		return stapelRij.isVol();
 	}
 		
 	

@@ -18,7 +18,7 @@ public class StartUp2 extends Application
 		
 		StartScherm root = new StartScherm(dc);
 		
-		Scene scene = new Scene(root, 400, 300);
+		Scene scene = new Scene(root, 800, 350);
 		primaryStage.setTitle("Coloretto");
 		primaryStage.setScene(scene);
 		primaryStage.show();

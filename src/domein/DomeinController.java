@@ -126,4 +126,8 @@ public class DomeinController
 	{
 		return spel.stapelIsGenomen(stapelID);
 	}
+	public boolean rijIsVol(int stapelID)
+	{
+		return spel.rijIsVol(stapelID);
+	}
 }

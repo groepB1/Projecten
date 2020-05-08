@@ -27,13 +27,13 @@ import javafx.stage.Stage;
 public class SpeelScherm extends GridPane
 {
 	private DomeinController dc;
-	private Label lblgetrokkenKaart;
+	private Label lblGetrokkenKaart;
 	private ImageView kaart;
-	private CheckBox cbrij1;
-	private CheckBox cbrij2;
-	private CheckBox cbrij3;
-	private CheckBox cbrij4;
-	private CheckBox cbrij5;
+	private CheckBox cbRij1;
+	private CheckBox cbRij2;
+	private CheckBox cbRij3;
+	private CheckBox cbRij4;
+	private CheckBox cbRij5;
 	private Image blauw;
 	private Image  geel;
 	private Image  grijs;
@@ -46,8 +46,8 @@ public class SpeelScherm extends GridPane
 	private Button btnLegOp;
 	private Button btnNeemStapel;
 	private Alert speler;
-	private Button btnscore;
-	private Button btnjoker;
+	private Button btnScore;
+	private Button btnJoker;
 	private Button btnOpslaan;
 	private Button btnTrekKaart;
 	private boolean heeftVijfSpelers;
@@ -63,7 +63,7 @@ public class SpeelScherm extends GridPane
 		//layout van scherm
 		this.setVgap(20);
 		this.setHgap(20);
-		this.setBackground(new Background(new BackgroundFill(Color.LIGHTSEAGREEN, null, null))); //layout van de scene
+		this.setBackground(new Background(new BackgroundFill(Color.LIGHTGRAY, null, null))); //layout van de scene
 		
 		//menu 
 		MenuBar menu = new MenuBar(); //menu om het speler overzicht op te vragen
@@ -76,8 +76,8 @@ public class SpeelScherm extends GridPane
 		
 		//titel
 		ImageView titel = new ImageView(new Image(getClass().getResourceAsStream("/images/ColorettoTitel.png")));
-		titel.setFitHeight(50);
-		titel.setFitWidth(150);
+		titel.setFitHeight(80);
+		titel.setFitWidth(200);
 		this.add(titel, 1, 1);
 
 		
@@ -85,7 +85,7 @@ public class SpeelScherm extends GridPane
 		Button btnSpeler = new Button("Speler aan zet");
 		this.add(btnSpeler, 3, 1);
 		
-		Label lblmessage = new Label("Ga eerst kijken welke speler aan zet is voor je start.");
+		Label lblmessage = new Label("Ga eerst kijken welke speler aan zet is.");
 		this.add(lblmessage, 2, 1);
 		
 		
@@ -110,39 +110,39 @@ public class SpeelScherm extends GridPane
 		roos = new  Image(getClass().getResourceAsStream("/images/Roos.png"));
 		
 		ImageView kaart = new ImageView();
-		kaart.setFitHeight(100);
-		kaart.setFitWidth(70);
+		kaart.setFitHeight(150);
+		kaart.setFitWidth(90);
 		this.add(kaart, 4, 3);
 		
 		//button om score scherm op te roepen bij einde spel
-		btnscore = new Button("Scores");
-		this.add(btnscore, 6, 7);
+		btnScore = new Button("Scores");
+		this.add(btnScore, 6, 7);
 		
 		
 		//button om jokerscherm op te roepen bij einde spel
-		btnjoker = new  Button("Jokers");
-		this.add(btnjoker, 3, 7);
-		btnjoker.setVisible(false);
+		btnJoker = new  Button("Jokers");
+		this.add(btnJoker, 3, 7);
+		btnJoker.setVisible(false);
 	
 	
 	
 		//checkboxen van de stapels
-		cbrij1 = new CheckBox("Eerste stapel"); 
-		this.add(cbrij1, 3, 4);
-		cbrij2 = new CheckBox("Tweede stapel");
-		this.add(cbrij2, 4, 4);
-		cbrij3 = new CheckBox("Derde stapel");
-		this.add(cbrij3, 5, 4);
-		cbrij4 = new CheckBox("Vierde stapel");
-		this.add(cbrij4, 6, 4);
+		cbRij1 = new CheckBox("Eerste stapel"); 
+		this.add(cbRij1, 3, 4);
+		cbRij2 = new CheckBox("Tweede stapel");
+		this.add(cbRij2, 4, 4);
+		cbRij3 = new CheckBox("Derde stapel");
+		this.add(cbRij3, 5, 4);
+		cbRij4 = new CheckBox("Vierde stapel");
+		this.add(cbRij4, 6, 4);
 		
-		cbrij5 = new CheckBox("Vijfde stapel");
-		this.add(cbrij5, 7, 4);
-		cbrij5.setVisible(false);
+		cbRij5 = new CheckBox("Vijfde stapel");
+		this.add(cbRij5, 7, 4);
+		cbRij5.setVisible(false);
 		
 		if(spelHeeftVijfSpelers(dc))
 		{
-			cbrij5.setVisible(true);
+			cbRij5.setVisible(true);
 		}
 		
 		//button om een kaart op te leggen
@@ -264,37 +264,37 @@ public class SpeelScherm extends GridPane
 			@Override
 			public void handle(ActionEvent event) 
 			{
-				if(cbrij1.isSelected() && cbrij2.isSelected())
+				if(cbRij1.isSelected() && cbRij2.isSelected())
 				{
 					Alert alert = new Alert(Alert.AlertType.WARNING);
 					alert.setHeaderText("Je kan maar 1 stapel aanduiden.");
 					alert.showAndWait();
 				}
-				else if(cbrij2.isSelected() && cbrij3.isSelected())
+				else if(cbRij2.isSelected() && cbRij3.isSelected())
 				{
 					Alert alert = new Alert(Alert.AlertType.WARNING);
 					alert.setHeaderText("Je kan maar 1 stapel aanduiden.");
 					alert.showAndWait();
 				}
-				else if(cbrij3.isSelected() && cbrij4.isSelected())
+				else if(cbRij3.isSelected() && cbRij4.isSelected())
 				{
 					Alert alert = new Alert(Alert.AlertType.WARNING);
 					alert.setHeaderText("Je kan maar 1 stapel aanduiden.");
 					alert.showAndWait();
 				}
-				else if(cbrij1.isSelected() && cbrij3.isSelected())
+				else if(cbRij1.isSelected() && cbRij3.isSelected())
 				{
 					Alert alert = new Alert(Alert.AlertType.WARNING);
 					alert.setHeaderText("Je kan maar 1 stapel aanduiden.");
 					alert.showAndWait();
 				}
-				else if(cbrij2.isSelected() && cbrij4.isSelected())
+				else if(cbRij2.isSelected() && cbRij4.isSelected())
 				{
 					Alert alert = new Alert(Alert.AlertType.WARNING);
 					alert.setHeaderText("Je kan maar 1 stapel aanduiden.");
 					alert.showAndWait();
 				}
-				else if(cbrij4.isSelected() && cbrij5.isSelected())
+				else if(cbRij4.isSelected() && cbRij5.isSelected())
 				{
 					Alert alert = new Alert(Alert.AlertType.WARNING);
 					alert.setHeaderText("Je kan maar 1 stapel aanduiden.");
@@ -304,16 +304,24 @@ public class SpeelScherm extends GridPane
 					
 				int stapelID = keuzeRij();
 				
+					if(dc.rijIsVol(stapelID))
+					{
+						Alert alert = new Alert(Alert.AlertType.WARNING);
+						alert.setHeaderText("De stapel is vol, kies een andere stapel.");
+						alert.showAndWait();
+						
+					}
+					else {
 				dc.voegKaartAanStapelToe(stapelID); //methode om kaart te te voegen aan de rijen
 				
-				cbrij1.setSelected(false);
-				cbrij2.setSelected(false);
-				cbrij3.setSelected(false);
-				cbrij4.setSelected(false);
+				cbRij1.setSelected(false);
+				cbRij2.setSelected(false);
+				cbRij3.setSelected(false);
+				cbRij4.setSelected(false);
 				
 				if(spelHeeftVijfSpelers(dc))
 				{
-					cbrij5.setSelected(false);
+					cbRij5.setSelected(false);
 				}
 				
 				StapelScherm sts = new StapelScherm(dc); //overzichtscherm van de rijen worden getoont
@@ -325,6 +333,8 @@ public class SpeelScherm extends GridPane
 				speler.setHeaderText(dc.geefSpelerAanZetWeer());//update van de speler aan zet
 				
 				}
+					
+				}
 			}
 	
 		});
@@ -335,37 +345,37 @@ public class SpeelScherm extends GridPane
 			@Override
 			public void handle(ActionEvent event) 
 			{
-				if(cbrij1.isSelected() && cbrij2.isSelected())
+				if(cbRij1.isSelected() && cbRij2.isSelected())
 				{
 					Alert alert = new Alert(Alert.AlertType.WARNING);
 					alert.setHeaderText("Je kan maar 1 stapel aanduiden.");
 					alert.showAndWait();
 				}
-				else if(cbrij2.isSelected() && cbrij3.isSelected())
+				else if(cbRij2.isSelected() && cbRij3.isSelected())
 				{
 					Alert alert = new Alert(Alert.AlertType.WARNING);
 					alert.setHeaderText("Je kan maar 1 stapel aanduiden.");
 					alert.showAndWait();
 				}
-				else if(cbrij3.isSelected() && cbrij4.isSelected())
+				else if(cbRij3.isSelected() && cbRij4.isSelected())
 				{
 					Alert alert = new Alert(Alert.AlertType.WARNING);
 					alert.setHeaderText("Je kan maar 1 stapel aanduiden.");
 					alert.showAndWait();
 				}
-				else if(cbrij1.isSelected() && cbrij3.isSelected())
+				else if(cbRij1.isSelected() && cbRij3.isSelected())
 				{
 					Alert alert = new Alert(Alert.AlertType.WARNING);
 					alert.setHeaderText("Je kan maar 1 stapel aanduiden.");
 					alert.showAndWait();
 				}
-				else if(cbrij2.isSelected() && cbrij4.isSelected())
+				else if(cbRij2.isSelected() && cbRij4.isSelected())
 				{
 					Alert alert = new Alert(Alert.AlertType.WARNING);
 					alert.setHeaderText("Je kan maar 1 stapel aanduiden.");
 					alert.showAndWait();
 				}
-				else if(cbrij4.isSelected() && cbrij5.isSelected())
+				else if(cbRij4.isSelected() && cbRij5.isSelected())
 				{
 					Alert alert = new Alert(Alert.AlertType.WARNING);
 					alert.setHeaderText("Je kan maar 1 stapel aanduiden.");
@@ -376,14 +386,14 @@ public class SpeelScherm extends GridPane
 				int stapelID = keuzeRij();
 				
 				
-				cbrij1.setSelected(false);
-				cbrij2.setSelected(false);
-				cbrij3.setSelected(false);
-				cbrij4.setSelected(false);
+				cbRij1.setSelected(false);
+				cbRij2.setSelected(false);
+				cbRij3.setSelected(false);
+				cbRij4.setSelected(false);
 				
 				if(spelHeeftVijfSpelers(dc))
 				{
-					cbrij5.setSelected(false);
+					cbRij5.setSelected(false);
 				}
 			
 				else 
@@ -427,13 +437,13 @@ public class SpeelScherm extends GridPane
 					else if(dc.isEindeSpel())
 						{
 						
-						btnjoker.setVisible(true);
+						btnJoker.setVisible(true);
 				
 						Alert einde = new Alert(Alert.AlertType.INFORMATION);
 						einde.setHeaderText("Einde spel! Ga eerst de jokers bekijken en bekijk nadien jullie scores!");
 						einde.showAndWait();
 						
-						btnjoker.setOnAction(new EventHandler<ActionEvent>() //kan jokerscherm oproepen
+						btnJoker.setOnAction(new EventHandler<ActionEvent>() //kan jokerscherm oproepen
 								{
 
 									@Override
@@ -458,7 +468,7 @@ public class SpeelScherm extends GridPane
 				
 			});
 			
-			btnscore.setOnAction(new EventHandler<ActionEvent>() //kan het scorescherm oproepen
+			btnScore.setOnAction(new EventHandler<ActionEvent>() //kan het scorescherm oproepen
 					{
 
 								@Override
@@ -504,26 +514,26 @@ public class SpeelScherm extends GridPane
 	{
 		int stapelID=0;
 		
-		if(cbrij1.isSelected())
+		if(cbRij1.isSelected())
 		{
 			stapelID = 1;
 		}
-		else if(cbrij2.isSelected())
+		else if(cbRij2.isSelected())
 		{
 			stapelID = 2;
 		}
-		else if(cbrij3.isSelected())
+		else if(cbRij3.isSelected())
 		{
 			stapelID = 3;
 		}
-		else if(cbrij4.isSelected())
+		else if(cbRij4.isSelected())
 		{
 			stapelID = 4;
 		}
 		
 		if(spelHeeftVijfSpelers(dc))
 		{
-			if(cbrij5.isSelected())
+			if(cbRij5.isSelected())
 			{
 			stapelID = 5;
 			}

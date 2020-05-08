@@ -12,6 +12,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.GridPane;
@@ -46,21 +48,23 @@ public class StartScherm  extends GridPane
 		this.setBackground(new Background(new BackgroundFill(Color.LIGHTGREEN, null, null)));
 		
 		//titel van startscherm
-		Label lblColoretto = new Label("COLORETTO");
-		lblColoretto.setFont(Font.font("Tahoma", FontWeight.BOLD, 40));
-		lblColoretto.setAlignment(Pos.CENTER);
-		this.add(lblColoretto, 2, 1);
+		ImageView titel = new ImageView(new Image(getClass().getResourceAsStream("/images/ColorettoTitel.png")));
+		titel.setFitHeight(120);
+		titel.setFitWidth(300);
+		this.add(titel, 3, 1);
+	
 		
 		//button om nieuw spel te starten
 		Button btnStartNieuwSpel = new Button("START NIEUW SPEL");
 		btnStartNieuwSpel.setAlignment(Pos.CENTER);
-		this.add(btnStartNieuwSpel, 2, 3);
+		
+		this.add(btnStartNieuwSpel, 2, 5);
 	
 		
 		// button om huidig spel verder te zetten
 		Button btnHuidigSpel = new Button("HERVAT HUIDIG SPEL");
 		btnStartNieuwSpel.setAlignment(Pos.CENTER);
-		this.add(btnHuidigSpel, 2, 5);
+		this.add(btnHuidigSpel, 4, 5);
 		
 		//menu om spel te kunnen afsluiten
 		MenuBar menu = new MenuBar();

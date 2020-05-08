@@ -12,7 +12,7 @@ public class ColorettoApplicatie
 		this.dc = dc;
 		int aantalSpelers=0;
 		boolean spelOpgeslagen = false;
-		System.out.println("geef 1 in om het vorige spel te hervatten. Geef 2 om om een nieuw spel te starten.");
+		System.out.println("Geef 1 in om het vorige spel te hervatten. Geef 2 om om een nieuw spel te starten.");
 		int startNieuwSpelOfSpelHervatten = invoer.nextInt();
 		
 		if (startNieuwSpelOfSpelHervatten ==1)
@@ -29,7 +29,7 @@ public class ColorettoApplicatie
 				speelRonde2En3(dc, aantalSpelers);
 				
 				//test opslaanSpel
-				System.out.println("geef 9999 in om het spel op te slaan en te stoppen. geef iets anders in om door te gaan. ");
+				System.out.println("Geef 9999 in om het spel op te slaan en te stoppen. geef iets anders in om door te gaan. ");
 				int stoppen = invoer.nextInt();
 				if (stoppen == 9999)
 				{
@@ -58,7 +58,7 @@ public class ColorettoApplicatie
 				ronde++;
 				
 				//test opslaanSpel
-				System.out.println("geef 9999 in om het spel op te slaan en te stoppen. geef iets anders in om door te gaan. ");
+				System.out.println("Geef 9999 in om het spel op te slaan en te stoppen. geef iets anders in om door te gaan. ");
 				int stoppen = invoer.nextInt();
 				if (stoppen == 9999)
 				{
@@ -72,7 +72,7 @@ public class ColorettoApplicatie
 		
 		//einde spel (joker + score)
 		if (spelOpgeslagen)
-			System.out.println("spel is opgeslaan");
+			System.out.println("Spel is opgeslaan");
 		
 		else 
 		{
@@ -85,7 +85,7 @@ public class ColorettoApplicatie
 	
 	public String geefSpelNaamIn(DomeinController dc)
 	{
-		System.out.println("geef een spelnaam In");
+		System.out.println("Geef een spelnaam in:");
 		String Spelnaam = invoer.next();
 		return Spelnaam;
 	}
@@ -109,7 +109,7 @@ public class ColorettoApplicatie
 		String result ="";
 		for (int teller = 0; teller<=aantalSpelers-1; teller++) 
 		{
-			System.out.printf("geef de naam van speler %d in.%n", teller+1);
+			System.out.printf("Geef de naam van speler %d in.%n", teller+1);
 			String naam = invoer.next();
 			result += dc.geefSpelerNaamIn(naam);
 		}
@@ -173,7 +173,7 @@ public class ColorettoApplicatie
 	
 	public int geefOptie()
 	{
-		System.out.println("geef 1 in om een kaart te leggen. Geef 2 in om een stapel te ");
+		System.out.println("Geef 1 in om een kaart te leggen. Geef 2 in om een stapel te nemen.");
 		int keuze = invoer.nextInt();
 		return keuze;
 	}
